@@ -9,7 +9,8 @@ import {
 
 export default class loginPage extends Component {
   render(){
-    const{container, upperContainer, middleContainer, bottomContainer, titleName, contentText} = styles;
+    const{container, upperContainer, middleContainer, bottomContainer, titleName,
+      contentText, loginBar, loginButton, registerButton, alignLeft} = styles;
 
 //add login button
 //add register button
@@ -21,15 +22,22 @@ export default class loginPage extends Component {
         </View>
 
         <View style={middleContainer}>
-
           <TextInput placeholder="Email"></TextInput>
           <TextInput placeholder="Password"></TextInput>
-          <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>LOGIN</Text>
+
+          <View style={loginBar}>
+            <View style={loginButton}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>LOGIN</Text>
+            </View>
+            <View style={registerButton}>
+              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>Register</Text>
+            </View>
+          </View>
+
         </View>
 
         <View style={bottomContainer}>
           <Text style={contentText}>Forgot password?</Text>
-          <Text style={contentText}>Register</Text>
         </View>
 
       </View>
@@ -40,7 +48,6 @@ export default class loginPage extends Component {
 const styles = StyleSheet.create ({
   container: {
     flex: 1,
-  //  backgroundColor: 'skyblue',
   },
 
   upperContainer: {
@@ -53,7 +60,6 @@ const styles = StyleSheet.create ({
     flex: 5,
     justifyContent: 'center',
     padding: 20,
-    //alignItems: 'center',
     // backgroundColor: 'yellow',
   },
 
@@ -77,7 +83,23 @@ const styles = StyleSheet.create ({
     color: 'grey',
     //width: 10,
   },
-});
 
+  loginBar: {
+    padding: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  loginButton: {
+    padding:5,
+    backgroundColor: 'lightgrey',
+  },
+
+  registerButton: {
+  padding: 5,
+  }
+
+
+});
 
 //AppRegistry.registerComponent('Second', () => loginPage);
