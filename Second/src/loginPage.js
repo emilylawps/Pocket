@@ -5,7 +5,9 @@ import {
   View,
   TextInput,
 } from 'react-native';
-import Header from './Header';
+import LoginHeader from './LoginHeader';
+//import Header from './Header';
+import Buttons from './Buttons';
 //import Menu from './Menu';
 
 class loginPage extends Component {
@@ -15,14 +17,14 @@ class loginPage extends Component {
 
     return(
       <View style={container}>
-        <Header/>
+        <LoginHeader Name={'EMILY'}/>
 
         <View style={middleContainer}>
           <TextInput placeholder="Email"></TextInput>
           <TextInput placeholder="Password"></TextInput>
 
           <View style={loginBar}>
-            <Text style={loginButton}>LOGIN</Text>
+            <Buttons buttonContent={'LOGIN'}/>
             <Text style={registerButton}>Register</Text>
           </View>
         </View>
