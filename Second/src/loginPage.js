@@ -1,45 +1,35 @@
 import React, { Component } from 'react';
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   TextInput,
 } from 'react-native';
+import Header from './Header';
+//import Menu from './Menu';
 
-export default class loginPage extends Component {
+class loginPage extends Component {
   render(){
-    const{container, upperContainer, middleContainer, bottomContainer, titleName,
-      contentText, loginBar, loginButton, registerButton, alignLeft} = styles;
+    const{container, middleContainer, bottomContainer,contentText, loginBar,
+       loginButton, registerButton, bottomText} = styles;
 
-//add login button
-//add register button
-//forgot password button
     return(
       <View style={container}>
-        <View style={upperContainer}>
-          <Text style={titleName}>Emily</Text>
-        </View>
+        <Header/>
 
         <View style={middleContainer}>
           <TextInput placeholder="Email"></TextInput>
           <TextInput placeholder="Password"></TextInput>
 
           <View style={loginBar}>
-            <View style={loginButton}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>LOGIN</Text>
-            </View>
-            <View style={registerButton}>
-              <Text style={{fontSize: 20, fontWeight: 'bold', color: 'black'}}>Register</Text>
-            </View>
+            <Text style={loginButton}>LOGIN</Text>
+            <Text style={registerButton}>Register</Text>
           </View>
-
         </View>
 
         <View style={bottomContainer}>
-          <Text style={contentText}>Forgot password?</Text>
+          <Text style={bottomText}>Forgot password?</Text>
         </View>
-
       </View>
     );
   }
@@ -50,14 +40,8 @@ const styles = StyleSheet.create ({
     flex: 1,
   },
 
-  upperContainer: {
-    flex: 1,
-    backgroundColor: 'skyblue',
-    padding: 10,
-  },
-
   middleContainer: {
-    flex: 5,
+    flex: 12,
     justifyContent: 'center',
     padding: 20,
     // backgroundColor: 'yellow',
@@ -66,22 +50,14 @@ const styles = StyleSheet.create ({
   bottomContainer: {
     flex: 1,
     alignItems: 'center',
-    //backgroundColor: 'green',
+  //  backgroundColor: 'green',
     flexDirection: 'row',
     padding: 20,
   },
 
-  titleName: {
-    fontSize: 50,
-    fontWeight: '100',
-    textAlign: 'center',
-    color: 'black',
-  },
-
-  contentText: {
+  bottomText: {
     fontSize: 20,
     color: 'grey',
-    //width: 10,
   },
 
   loginBar: {
@@ -91,15 +67,20 @@ const styles = StyleSheet.create ({
   },
 
   loginButton: {
+    backgroundColor: '#ccccff',
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: 'black',
     padding:5,
-    backgroundColor: 'lightgrey',
+    elevation: 5
   },
 
   registerButton: {
+  fontSize: 20,
+  color: 'black',
   padding: 5,
   }
-
-
 });
 
+export default loginPage;
 //AppRegistry.registerComponent('Second', () => loginPage);
