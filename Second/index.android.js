@@ -1,5 +1,5 @@
 import { AppRegistry } from 'react-native';
 
-import loginPage from './src/loginPage';
+import App from './src/App';
 
-AppRegistry.registerComponent('Second', () => loginPage);
+AppRegistry.registerComponent('Second', () => App);

@@ -27,8 +27,7 @@ const styles = StyleSheet.create ({
     backgroundColor: '#ccccff',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    height: 45,
-    elevation: 10,
+    height: 35,
   },
 
   menuButton:{
@@ -41,7 +40,7 @@ const styles = StyleSheet.create ({
   textStyle:{
     textAlign: 'center',
     color: 'black',
-    fontSize: 23
+    fontSize: 20
   }
 });
 

@@ -24,7 +24,7 @@ const Header = () => {
 
 const styles = StyleSheet.create ({
   upperContainer: {
-    flex: 2,
+    flex: 1.5,
     backgroundColor: '#ccccff',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -45,9 +45,8 @@ const styles = StyleSheet.create ({
   },
 
   imageSize: {
-    width: 30,
-    height: 30,
-
+    width: 25,
+    height: 25,
   }
 });
 
