@@ -7,6 +7,9 @@ import { Scene, Router } from 'react-native-router-flux';
 
 import LoginPage from './page/LoginPage';
 import Register from './page/Register';
+import Home from './page/Home';
+import Planning from './page/Planning';
+import Statistic from './page/Statistic';
 
 class RouterComponent extends Component {
   render() {
@@ -14,18 +17,14 @@ class RouterComponent extends Component {
     return(
         <Router>
           <Scene key="root">
-            <Scene key="login" component={LoginPage} title="LOGIN" initial={true} />
-            <Scene key="register" component={Register} title="Register" />
+            <Scene key="login"  hideNavBar component={LoginPage}  initial={true} />
+            <Scene key="register" component={Register} />
+            <Scene key="home" component={Home} />
+            <Scene key="planning" component={Planning} />
+            <Scene key="statistic" component={Statistic} />
           </Scene>
         </Router>
     );
   }
 }
-
-// const styles = {
-//   container: {
-//     flex: 1
-//   }
-// }
-
 export default RouterComponent;

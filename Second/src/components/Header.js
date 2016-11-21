@@ -11,13 +11,7 @@ const Header = () => {
 
   return (
       <View style={upperContainer}>
-        <View style={imageBox}>
-          <Image source={require('./search.png')} style={imageSize} />
-        </View>
-        <Text style={titleName}>EMILY</Text>
-        <View style={imageBox}>
-          <Image source={require('./logout.png')} style={imageSize} />
-        </View>
+        <Text style={titleName}>MONEY</Text>
       </View>
   );
 }
@@ -38,16 +32,16 @@ const styles = StyleSheet.create ({
     textAlign: 'center',
     color: 'black'
   },
-
-  imageBox: {
-    paddingLeft: 12,
-    paddingRight: 12
-  },
-
-  imageSize: {
-    width: 25,
-    height: 25,
-  }
+  //
+  // imageBox: {
+  //   paddingLeft: 12,
+  //   paddingRight: 12
+  // },
+  //
+  // imageSize: {
+  //   width: 25,
+  //   height: 25,
+  // }
 });
 
 export default Header;

@@ -21,10 +21,11 @@ class Register extends Component {
           <Text style={titleName}>MONEY</Text>
           <TextInput placeholder="Email"></TextInput>
           <TextInput placeholder="Password"></TextInput>
+          <TextInput placeholder="Confirm Password"></TextInput>
 
           <View style={loginBar}>
-            <ButtonComponent style={registerButton} onPress={Actions.register} text="Register"/>
-            <ButtonComponent style={loginButton} onPress={Actions.login} text="LOGIN"/>
+            <ButtonComponent style={registerButton} onPress={Actions.register} text="REGISTER"/>
+            <ButtonComponent style={loginButton} onPress={Actions.login} text="Login"/>
           </View>
         </View>
         <View style={bottomContainer}></View>
@@ -79,7 +80,6 @@ const styles = StyleSheet.create ({
     // fontWeight: 'bold',
     // color: 'black',
     // padding:5,
-
     height: 40,
     width: 80
   },
@@ -89,11 +89,9 @@ const styles = StyleSheet.create ({
   // fontSize: 20,
   // color: 'black',
     elevation: 5,
-    // padding: 5,
     height: 40,
     width: 80
   }
 });
 
 export default Register;
-//AppRegistry.registerComponent('Second', () => loginPage);

@@ -4,23 +4,37 @@ import {
   Text,
   StyleSheet
 } from 'react-native';
+import {Actions} from 'react-native-router-flux';
+import ButtonComponent, { RectangleButton } from 'react-native-button-component';
 
 const Menu = () => {
   const {menuContainer, menuButton, textStyle} = styles;
   return (
     <View style={menuContainer}>
       <View style={menuButton}>
-        <Text style={textStyle}>Expenses</Text>
+        <ButtonComponent style={textStyle} onPress={Actions.home} text="Expenses" title="Expenses" />
       </View>
       <View style={menuButton}>
-        <Text style={textStyle}>Planning</Text>
+        <ButtonComponent style={textStyle} onPress={Actions.planning} text="Planning" />
       </View>
       <View style={menuButton}>
-        <Text style={textStyle}>Statistic</Text>
+        <ButtonComponent style={textStyle} onPress={Actions.statistic} text="Statistic" />
       </View>
     </View>
   );
 }
+
+// <View style={menuContainer}>
+//   <View style={menuButton}>
+//     <Text style={textStyle}>Expenses</Text>
+//   </View>
+//   <View style={menuButton}>
+//     <Text style={textStyle}>Planning</Text>
+//   </View>
+//   <View style={menuButton}>
+//     <Text style={textStyle}>Statistic</Text>
+//   </View>
+// </View>
 
 const styles = StyleSheet.create ({
   menuContainer:{
@@ -30,17 +44,19 @@ const styles = StyleSheet.create ({
     height: 35,
   },
 
-  menuButton:{
-    justifyContent: 'center',
-    flex: 1,
-    borderColor: 'grey',
-    borderLeftWidth: 1,
-  },
+  // menuButton:{
+  //   justifyContent: 'center',
+  //   flex: 1,
+  //   borderColor: 'grey',
+  //   borderLeftWidth: 1,
+  // },
 
   textStyle:{
-    textAlign: 'center',
-    color: 'black',
-    fontSize: 20
+    // textAlign: 'center',
+    // color: 'black',
+    // fontSize: 20,
+    height: 40,
+    width: 120
   }
 });
 

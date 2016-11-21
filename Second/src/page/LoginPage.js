@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
 } from 'react-native';
+import Menu from './../components/Menu';
 import {Actions} from 'react-native-router-flux';
 
 import ButtonComponent, { RectangleButton } from 'react-native-button-component';
@@ -14,6 +15,7 @@ class LoginPage extends Component {
     const{container, titleName, middleContainer, bottomContainer,contentText, loginBar,
        loginButton, registerButton, bottomText} = styles;
 
+//login button is directed to home page!!!
     return(
       <View style={container}>
         <View style={middleContainer}>
@@ -22,7 +24,7 @@ class LoginPage extends Component {
           <TextInput placeholder="Password"></TextInput>
 
           <View style={loginBar}>
-            <ButtonComponent style={loginButton} onPress={Actions.login} text="LOGIN"/>
+            <ButtonComponent style={loginButton} onPress={Actions.home} text="LOGIN"/>
             <ButtonComponent style={registerButton} onPress={Actions.register} text="Register"/>
           </View>
         </View>
@@ -88,7 +90,7 @@ const styles = StyleSheet.create ({
 
   registerButton: {
     backgroundColor: '#ccccff',
-    // fontSize: 20,
+    borderColor: '#ccccff',
     // color: 'black',
     // padding: 5,
     height: 40,
@@ -98,4 +100,3 @@ const styles = StyleSheet.create ({
 });
 
 export default LoginPage;
-//AppRegistry.registerComponent('Second', () => loginPage);
