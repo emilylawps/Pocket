@@ -4,11 +4,13 @@ import {
   Text,
   View,
   TextInput,
+  Button,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import Menu from './../components/Menu';
 import {Actions} from 'react-native-router-flux';
-
-import ButtonComponent, { RectangleButton } from 'react-native-button-component';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
+// import ButtonComponent, { RectangleButton } from 'react-native-button-component';
 
 class LoginPage extends Component {
   render(){
@@ -17,22 +19,23 @@ class LoginPage extends Component {
 
 //login button is directed to home page!!!
     return(
+      <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
       <View style={container}>
         <View style={middleContainer}>
-          <Text style={titleName}>MONEY</Text>
-          <TextInput placeholder="Email"></TextInput>
-          <TextInput placeholder="Password"></TextInput>
-
+          <Text style={titleName}>POCKET</Text>
+            <TextInput placeholder="Email"></TextInput>
+            <TextInput placeholder="Password" secureTextEntry></TextInput>
           <View style={loginBar}>
-            <ButtonComponent style={loginButton} onPress={Actions.home} text="LOGIN"/>
-            <ButtonComponent style={registerButton} onPress={Actions.register} text="Register"/>
+            <Button style={loginButton} onPress={Actions.home} title="LOGIN"/>
+            <Button style={registerButton} onPress={Actions.register} title="Register an account"/>
           </View>
         </View>
-
         <View style={bottomContainer}>
           <Text style={bottomText}>Forgot password?</Text>
         </View>
       </View>
+      </TouchableWithoutFeedback>
+
     );
   }
 }
@@ -40,13 +43,14 @@ class LoginPage extends Component {
 const styles = StyleSheet.create ({
   container: {
     flex: 1,
+    backgroundColor: 'linen',
   },
 
   titleName: {
     fontSize: 30,
     fontWeight: 'bold',
     textAlign: 'center',
-    color: 'black',
+    color: 'indianred',
   },
 
   middleContainer: {
@@ -70,10 +74,11 @@ const styles = StyleSheet.create ({
   },
 
   loginBar: {
+    height: 100,
     paddingLeft: 5,
     paddingRight: 5,
     paddingTop: 10,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
   },
 

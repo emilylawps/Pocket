@@ -22,7 +22,7 @@ const LoginHeader = (props) => {
 const styles = StyleSheet.create ({
   upperContainer: {
     flex: 1.5,
-    backgroundColor: '#ccccff',
+    backgroundColor: 'linen',
     justifyContent: 'space-between',
     alignItems: 'center',
     flexDirection: 'row',
@@ -33,7 +33,7 @@ const styles = StyleSheet.create ({
     fontSize: 30,
     fontWeight: '100',
     textAlign: 'center',
-    color: 'black',
+    color: 'indianred',
   },
 
   imageBox: {

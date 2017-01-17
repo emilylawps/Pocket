@@ -12,7 +12,7 @@ class forgotPassword extends Component {
     const{container, container2} = styles;
     return (
       <View styles={container}>
-        <LoginHeader Name={'MONEY'} />
+        <LoginHeader Name={'POCKET'} />
         <View styles={container2}>
           <TextInput placeholder="Email"></TextInput>
         </View>

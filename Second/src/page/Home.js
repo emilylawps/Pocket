@@ -31,7 +31,8 @@ const styles = {
 
   mainContainer: {
     flex: 12,
-    elevation: 5
+    // elevation: 5,
+    backgroundColor: 'beige'
   }
 };
 

@@ -2,46 +2,37 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
+  Button,
   StyleSheet
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import ButtonComponent, { RectangleButton } from 'react-native-button-component';
+// import ButtonComponent, { RectangleButton } from 'react-native-button-component';
 
 const Menu = () => {
   const {menuContainer, menuButton, textStyle} = styles;
   return (
     <View style={menuContainer}>
-      <View style={menuButton}>
-        <ButtonComponent style={textStyle} onPress={Actions.home} text="Expenses" title="Expenses" />
+      <View>
+        <Button onPress={Actions.home} title="Expenses" />
       </View>
-      <View style={menuButton}>
-        <ButtonComponent style={textStyle} onPress={Actions.planning} text="Planning" />
+      <View>
+        <Button onPress={Actions.planning} title="Planning" />
       </View>
-      <View style={menuButton}>
-        <ButtonComponent style={textStyle} onPress={Actions.statistic} text="Statistic" />
+      <View>
+        <Button onPress={Actions.statistic} title="Statistic" />
       </View>
     </View>
   );
 }
 
-// <View style={menuContainer}>
-//   <View style={menuButton}>
-//     <Text style={textStyle}>Expenses</Text>
-//   </View>
-//   <View style={menuButton}>
-//     <Text style={textStyle}>Planning</Text>
-//   </View>
-//   <View style={menuButton}>
-//     <Text style={textStyle}>Statistic</Text>
-//   </View>
-// </View>
-
 const styles = StyleSheet.create ({
   menuContainer:{
-    backgroundColor: '#ccccff',
+    backgroundColor: 'linen',
     flexDirection: 'row',
     justifyContent: 'space-around',
+    alignItems: 'flex-start',
     height: 35,
+    elevation: 5
   },
 
   // menuButton:{
@@ -51,13 +42,13 @@ const styles = StyleSheet.create ({
   //   borderLeftWidth: 1,
   // },
 
-  textStyle:{
-    // textAlign: 'center',
-    // color: 'black',
-    // fontSize: 20,
-    height: 40,
-    width: 120
-  }
+  // textStyle:{
+  //   // textAlign: 'center',
+  //   // color: 'black',
+  //   // fontSize: 20,
+  //   height: 40,
+  //   width: 10
+  // }
 });
 
 export default Menu;
