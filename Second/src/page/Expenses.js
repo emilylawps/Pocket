@@ -7,9 +7,8 @@ import {
 import {Actions} from 'react-native-router-flux';
 
 import LoginHeader from './../components/LoginHeader';
-import Menu from './../components/Menu';
 
-class Home extends Component {
+class Expenses extends Component {
   render(){
     const {container, mainContainer} = styles;
 
@@ -17,7 +16,6 @@ class Home extends Component {
       <View style={container}>
         <LoginHeader Name={'Expenses'} />
         <View style={mainContainer}></View>
-        <Menu />
       </View>
 
     );
@@ -36,4 +34,4 @@ const styles = {
   }
 };
 
-export default Home;
+export default Expenses;

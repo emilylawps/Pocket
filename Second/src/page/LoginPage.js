@@ -7,7 +7,6 @@ import {
   Button,
   TouchableWithoutFeedback,
 } from 'react-native';
-import Menu from './../components/Menu';
 import {Actions} from 'react-native-router-flux';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 // import ButtonComponent, { RectangleButton } from 'react-native-button-component';
@@ -26,7 +25,7 @@ class LoginPage extends Component {
             <TextInput placeholder="Email"></TextInput>
             <TextInput placeholder="Password" secureTextEntry></TextInput>
           <View style={loginBar}>
-            <Button style={loginButton} onPress={Actions.home} title="LOGIN"/>
+            <Button style={loginButton} onPress={Actions.menu} title="LOGIN"/>
             <Button style={registerButton} onPress={Actions.register} title="Register an account"/>
           </View>
         </View>
@@ -35,7 +34,6 @@ class LoginPage extends Component {
         </View>
       </View>
       </TouchableWithoutFeedback>
-
     );
   }
 }
@@ -62,15 +60,17 @@ const styles = StyleSheet.create ({
 
   bottomContainer: {
     flex: 1,
-    alignItems: 'center',
-  //  backgroundColor: 'green',
+    alignItems: 'flex-end',
+    // backgroundColor: 'green',
     flexDirection: 'row',
-    padding: 20,
+    padding: 10,
   },
 
   bottomText: {
-    fontSize: 20,
+    fontSize: 15,
     color: 'grey',
+    // backgroundColor: 'blue',
+    padding: 10
   },
 
   loginBar: {

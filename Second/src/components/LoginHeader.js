@@ -11,9 +11,6 @@ const LoginHeader = (props) => {
   return (
       <View style={upperContainer}>
         <Text style={titleName}>{props.Name}</Text>
-        <View style={imageBox}>
-          <Image style={imageSize} source={require('./../logout.png')} />
-        </View>
       </View>
 
   );
@@ -30,15 +27,17 @@ const styles = StyleSheet.create ({
   },
 
   titleName: {
-    fontSize: 30,
+    fontSize: 22,
     fontWeight: '100',
     textAlign: 'center',
     color: 'indianred',
+    padding: 10
   },
 
   imageBox: {
     paddingLeft: 12,
-    paddingRight: 12
+    paddingRight: 12,
+    backgroundColor: 'yellow'
   },
 
   imageSize: {

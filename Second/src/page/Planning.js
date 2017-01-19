@@ -6,7 +6,6 @@ import {
   TextInput
 } from 'react-native';
 import LoginHeader from './../components/LoginHeader';
-import Menu from './../components/Menu';
 
 class Planning extends Component {
   render(){
@@ -16,7 +15,6 @@ class Planning extends Component {
       <View style={container}>
       <LoginHeader Name={'Planning'} />
         <View style={mainContainer} />
-        <Menu />
       </View>
     );
   }
