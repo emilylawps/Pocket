@@ -1,47 +1,57 @@
-import React, { Component } from 'react';
+import React from 'react';
 import {
   View,
   Text,
   Image,
-  StyleSheet
+  StyleSheet,
+  TouchableNativeFeedback
 } from 'react-native';
+import {Actions} from 'react-native-router-flux';
 
-const Header = () => {
-  const {upperContainer, titleName, imageSize, imageBox} = styles;
-
+const Header = (props) => {
+  const {upperContainer, titleName, imageBox, imageSize} = styles;
   return (
       <View style={upperContainer}>
-        <Text style={titleName}>MONEY</Text>
+        <Text style={titleName}>{props.Name}</Text>
+
+        <TouchableNativeFeedback onPress={props.Page}>
+          <View style={imageBox}>
+            <Image style={imageSize} source={props.Icon} />
+          </View>
+        </TouchableNativeFeedback>
+
       </View>
+
   );
 }
 
 const styles = StyleSheet.create ({
   upperContainer: {
     flex: 1.5,
-    backgroundColor: '#ccccff',
+    backgroundColor: 'linen',
     justifyContent: 'space-between',
     alignItems: 'center',
+    flexDirection: 'row',
     elevation: 5,
-    flexDirection: 'row'
   },
 
   titleName: {
-    fontSize: 35,
+    fontSize: 22,
     fontWeight: '100',
     textAlign: 'center',
-    color: 'black'
+    color: 'lightslategrey',
+    padding: 10
   },
-  //
-  // imageBox: {
-  //   paddingLeft: 12,
-  //   paddingRight: 12
-  // },
-  //
-  // imageSize: {
-  //   width: 25,
-  //   height: 25,
-  // }
+
+  imageBox: {
+    padding: 10,
+    // backgroundColor: 'yellow'
+  },
+
+  imageSize: {
+    width: 28,
+    height: 28,
+  }
 });
 
 export default Header;

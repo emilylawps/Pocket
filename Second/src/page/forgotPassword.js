@@ -2,21 +2,26 @@ import React, { Component } from 'react';
 import {
   Text,
   View,
-  TextInput
+  TextInput,
+  TouchableWithoutFeedback
 } from 'react-native';
 
-import LoginHeader from './../components/LoginHeader'
+import Header from './../components/Header';
+import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class forgotPassword extends Component {
   render(){
     const{container, container2} = styles;
+    
     return (
-      <View styles={container}>
-        <LoginHeader Name={'POCKET'} />
-        <View styles={container2}>
-          <TextInput placeholder="Email"></TextInput>
+      <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
+        <View style={container}>
+          <Header Name={'POCKET'} />
+          <View style={container2}>
+            <TextInput placeholder="Email"></TextInput>
+          </View>
         </View>
-      </View>
+      </TouchableWithoutFeedback>
     );
   }
 }

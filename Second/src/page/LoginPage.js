@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   Button,
+  TouchableNativeFeedback,
   TouchableWithoutFeedback,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
@@ -13,25 +14,32 @@ import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class LoginPage extends Component {
   render(){
-    const{container, titleName, middleContainer, bottomContainer,contentText, loginBar,
-       loginButton, registerButton, bottomText} = styles;
+    const{container, titleName, middleContainer, bottomContainer, loginBar, bottomText} = styles;
 
 //login button is directed to home page!!!
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
       <View style={container}>
+
         <View style={middleContainer}>
           <Text style={titleName}>POCKET</Text>
             <TextInput placeholder="Email"></TextInput>
             <TextInput placeholder="Password" secureTextEntry></TextInput>
+
           <View style={loginBar}>
-            <Button style={loginButton} onPress={Actions.menu} title="LOGIN"/>
-            <Button style={registerButton} onPress={Actions.register} title="Register an account"/>
+            <Button onPress={Actions.menu} title="LOGIN"/>
+            <Button onPress={Actions.register} title="Register an account"/>
           </View>
         </View>
+
         <View style={bottomContainer}>
-          <Text style={bottomText}>Forgot password?</Text>
+          <TouchableNativeFeedback onPress={Actions.forgotPassword}>
+            <View>
+              <Text style={bottomText}>Forgot password?</Text>
+            </View>
+          </TouchableNativeFeedback>
         </View>
+
       </View>
       </TouchableWithoutFeedback>
     );
@@ -49,6 +57,7 @@ const styles = StyleSheet.create ({
     fontWeight: 'bold',
     textAlign: 'center',
     color: 'indianred',
+    padding: 20
   },
 
   middleContainer: {
@@ -74,34 +83,27 @@ const styles = StyleSheet.create ({
   },
 
   loginBar: {
-    height: 100,
-    paddingLeft: 5,
-    paddingRight: 5,
+    height: 120,
+    paddingHorizontal: 5,
     paddingTop: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
+    // backgroundColor: 'grey'
   },
-
-  loginButton: {
-    backgroundColor: '#ccccff',
-    // fontSize: 22,
-    // fontWeight: 'bold',
-    // color: 'black',
-    // padding:5,
-    elevation: 5,
-    height: 40,
-    width: 80
-  },
-
-  registerButton: {
-    backgroundColor: '#ccccff',
-    borderColor: '#ccccff',
-    // color: 'black',
-    // padding: 5,
-    height: 40,
-    width: 80
-  },
-
+  //
+  // loginButton: {
+  //   backgroundColor: '#ccccff',
+  //   elevation: 5,
+  //   height: 40,
+  //   width: 80
+  // },
+  //
+  // registerButton: {
+  //   backgroundColor: '#ccccff',
+  //   borderColor: '#ccccff',
+  //   height: 40,
+  //   width: 80
+  // },
 });
 
 export default LoginPage;

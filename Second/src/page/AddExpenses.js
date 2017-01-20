@@ -5,21 +5,19 @@ import {
   TextInput,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
+
 import Header from './../components/Header';
 
-class Expenses extends Component {
+class AddExpenses extends Component {
   render(){
     const {container, mainContainer} = styles;
 
     return(
       <View style={container}>
-        <Header
-          Name={'Expenses'}
-          Icon={(require('./../add.png'))}
-          Page={(Actions.addExpenses)}
-        />
+        <Header Name={'Add New Expenses'} />
         <View style={mainContainer}></View>
       </View>
+
     );
   }
 }
@@ -36,4 +34,4 @@ const styles = {
   }
 };
 
-export default Expenses;
+export default AddExpenses;

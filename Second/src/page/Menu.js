@@ -6,16 +6,18 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import LoginHeader from './../components/LoginHeader';
-import ButtonComponent from 'react-native-button-component';
+import Header from './../components/Header';
+// import ButtonComponent from 'react-native-button-component';
 
 const Menu = () => {
-  const {container, menuContainer, menuButton, menuText, logoutText, logoutButton} = styles;
+  const {container, menuContainer, welcomeText, menuButton, menuText, logoutText, logoutButton} = styles;
   return (
     <View style={container}>
-     <LoginHeader Name={'POCKET'} />
+     <Header Name={'Home'} />
       <View style={menuContainer}>
-      
+
+      <Text style={welcomeText}>Welcome! Username</Text>
+
       <TouchableNativeFeedback onPress={Actions.expenses}>
         <View style={menuButton}>
           <Text style={menuText}> Expenses </Text>
@@ -54,6 +56,12 @@ const styles = StyleSheet.create ({
     backgroundColor: 'beige',
     padding: 10,
     flex: 12
+  },
+
+  welcomeText:{
+    fontSize: 18,
+    paddingTop: 10,
+    color: 'lightslategrey'
   },
 
   menuButton:{

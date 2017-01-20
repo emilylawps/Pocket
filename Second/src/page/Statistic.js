@@ -5,7 +5,7 @@ import {
   View,
   TextInput
 } from 'react-native';
-import LoginHeader from './../components/LoginHeader';
+import Header from './../components/Header';
 
 class Statistic extends Component {
   render(){
@@ -13,7 +13,7 @@ class Statistic extends Component {
 
     return(
       <View style={container}>
-      <LoginHeader Name={'Statistic'} />
+      <Header Name={'Statistic'} />
         <View style={mainContainer} />
       </View>
     );

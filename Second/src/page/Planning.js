@@ -5,7 +5,8 @@ import {
   View,
   TextInput
 } from 'react-native';
-import LoginHeader from './../components/LoginHeader';
+import {Actions} from 'react-native-router-flux';
+import Header from './../components/Header';
 
 class Planning extends Component {
   render(){
@@ -13,7 +14,11 @@ class Planning extends Component {
 
     return(
       <View style={container}>
-      <LoginHeader Name={'Planning'} />
+        <Header
+          Name={'Planning'}
+          Icon={(require('./../add.png'))}
+          Page={(Actions.addPlanning)}
+        />
         <View style={mainContainer} />
       </View>
     );
