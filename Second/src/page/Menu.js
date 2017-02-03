@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableNativeFeedback
 } from 'react-native';
+import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import Header from './../components/Header';
 // import ButtonComponent from 'react-native-button-component';
@@ -36,7 +37,7 @@ const Menu = () => {
         </View>
       </TouchableNativeFeedback>
 
-      <TouchableNativeFeedback>
+      <TouchableNativeFeedback onPress={() => firebase.auth().signOut()}>
         <View style={logoutButton} >
           <Text style={logoutText}> Log Out </Text>
         </View>

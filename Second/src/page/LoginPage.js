@@ -8,26 +8,79 @@ import {
   TouchableNativeFeedback,
   TouchableWithoutFeedback,
 } from 'react-native';
+import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
+import {Spinner} from './../components/Spinner';
 // import ButtonComponent, { RectangleButton } from 'react-native-button-component';
 
 class LoginPage extends Component {
-  render(){
-    const{container, titleName, middleContainer, bottomContainer, loginBar, bottomText} = styles;
+  state = {
+    email: '',
+    password: '',
+    error: '',
+    loading: false
+  };
 
-//login button is directed to home page!!!
+  onButtonPress() {
+    const {email, password } = this.state;
+
+    this.setState({ error: '', loading: true});
+
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(this.onLoginSuccess.bind(this))
+      .catch(() => {          //fail to sign in
+        this.setState({ error: 'Invalid email or password.'});
+      });
+  }
+
+  onLoginSuccess() {
+    this.setState({
+      email: '',
+      password: '',
+      loading: false,
+      error: ''
+    });
+  }
+  //
+  // renderButton() {
+  //   if (this.state.loading) {
+  //     return <Spinner size = "small" />;
+  //   }
+
+  render(){
+    const{container, titleName, middleContainer, bottomContainer, loginBar, bottomText, errorText} = styles;
+
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
       <View style={container}>
 
         <View style={middleContainer}>
           <Text style={titleName}>POCKET</Text>
-            <TextInput placeholder="Email"></TextInput>
-            <TextInput placeholder="Password" secureTextEntry></TextInput>
+
+            <TextInput
+              placeholder="Email"
+              label="Email"
+              value = { this.state.email }
+              onChangeText = {email => this.setState({ email })}
+            />
+
+            <TextInput
+              placeholder="Password"
+              label="Password"
+              secureTextEntry
+              value = { this.state.password }
+              onChangeText = {password => this.setState({ password })}
+            />
+
+            <Text style={errorText}>
+              {this.state.error}
+            </Text>
 
           <View style={loginBar}>
-            <Button onPress={Actions.menu} title="LOGIN"/>
+
+            <Button onPress={this.onButtonPress.bind(this)} title="LOGIN"/>
+
             <Button onPress={Actions.register} title="Register an account"/>
           </View>
         </View>
@@ -89,6 +142,13 @@ const styles = StyleSheet.create ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     // backgroundColor: 'grey'
+  },
+
+  errorText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'red',
+    paddingHorizontal: 5,
   },
   //
   // loginButton: {

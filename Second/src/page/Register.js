@@ -7,24 +7,77 @@ import {
   Button,
   TouchableWithoutFeedback
 } from 'react-native';
+import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 
 class Register extends Component {
+  state = {
+    username: '',
+    email: '',
+    password: '',
+    error: '',
+    loading:false
+  };
+
+  onButtonPress() {
+    const {username, email, password } = this.state;
+
+    this.setState({ error: '', loading:true});
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(this.onRegisterSuccess.bind(this))
+      .catch(() => {      //fail to create new account
+        this.setState({ error: 'Failed to create new account. Please use a valid email.'});
+      });
+  }
+
+  onRegisterSuccess() {
+    this.setState({
+      username: '',
+      email: '',
+      password: '',
+      loading: false,
+      error: ''
+    });
+  }
+
   render(){
-    const{container, titleName, loginBar} = styles;
+    const{container, titleName, loginBar, errorText} = styles;
 
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
         <View style={container}>
           <Text style={titleName}>POCKET</Text>
-          <TextInput placeholder="Username"></TextInput>
-          <TextInput placeholder="Email"></TextInput>
-          <TextInput placeholder="Password" secureTextEntry></TextInput>
-          <TextInput placeholder="Confirm Password" secureTextEntry></TextInput>
+
+          <TextInput
+            placeholder="Username"
+            label="Username"
+            value = { this.state.username }
+            onChangeText = {username => this.setState({ username })}
+          />
+
+          <TextInput
+            placeholder="Email"
+            label="Email"
+            value = { this.state.email }
+            onChangeText = {email => this.setState({ email })}
+          />
+
+          <TextInput
+            placeholder="Password"
+            label="Password"
+            secureTextEntry
+            value = { this.state.password }
+            onChangeText = {password => this.setState({ password })}
+          />
+
+          <Text style={errorText}>
+            {this.state.error}
+          </Text>
 
           <View style={loginBar}>
-            <Button onPress={Actions.register} title="REGISTER"/>
+            <Button onPress={this.onButtonPress.bind(this)} title="REGISTER"/>
           </View>
         </View>
       </TouchableWithoutFeedback>
@@ -56,6 +109,13 @@ const styles = StyleSheet.create ({
     paddingTop: 10,
     flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+
+  errorText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'red',
+    paddingHorizontal: 5,
   },
 
 });
