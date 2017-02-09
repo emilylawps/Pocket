@@ -60,6 +60,7 @@ class Register extends Component {
           <TextInput
             placeholder="Email"
             label="Email"
+            keyboardType= 'email-address'
             value = { this.state.email }
             onChangeText = {email => this.setState({ email })}
           />

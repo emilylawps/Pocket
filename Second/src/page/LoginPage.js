@@ -11,7 +11,7 @@ import {
 import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
-import {Spinner} from './../components/Spinner';
+// import {Spinner} from './../components/Spinner';
 // import ButtonComponent, { RectangleButton } from 'react-native-button-component';
 
 class LoginPage extends Component {
@@ -61,6 +61,7 @@ class LoginPage extends Component {
             <TextInput
               placeholder="Email"
               label="Email"
+              keyboardType= 'email-address'
               value = { this.state.email }
               onChangeText = {email => this.setState({ email })}
             />
