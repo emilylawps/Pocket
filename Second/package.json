@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.15.2",
     "firebase": "^3.6.6",
+    "lodash": "^4.17.4",
     "react": "15.3.2",
     "react-native": "0.37.0",
     "react-native-button-component": "0.0.5",

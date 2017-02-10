@@ -1,18 +1,21 @@
 import {
-  EXPENSES_UPDATE
+  EXPENSES_UPDATE,
+  EXPENSES_CREATE
 } from './../actions/types';
 
 const INITIAL_STATE = {
   date: '',
   category: '',
   amount: '',
-  note: ''
+  notes: ''
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case EXPENSES_UPDATE:
       return { ...state, [action.payload.prop]: action.payload.value};
+    case EXPENSES_CREATE:
+      return INITIAL_STATE;
     default:
      return state;
   }

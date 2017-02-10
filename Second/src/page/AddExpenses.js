@@ -9,13 +9,19 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
-import { expensesUpdate } from './../actions';
+import { expensesUpdate, expensesCreate } from './../actions';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import CardSection from './../components/CardSection';
 import Header from './../components/Header';
 import Input from './../components/Input';
 
 class AddExpenses extends Component {
+  onButtonPress() {
+    const { date, category, amount, notes} = this.props;
+
+    this.props.expensesCreate({ date, category: category || 'General', amount, notes});
+  }
+
   render(){
     const {container, mainContainer, buttonStyle, buttonText, labelStyle, inputStyle, datePickerStyle, pickerText} = styles;
 
@@ -70,17 +76,17 @@ class AddExpenses extends Component {
           </CardSection>
 
           <CardSection style={{flexDirection: 'column'}}>
-            <Text style={labelStyle}>Note</Text>
+            <Text style={labelStyle}>Notes</Text>
             <TextInput
               style={inputStyle}
               multiline={true}
               numberOfLines= {3}
-              value = {this.props.note}
-              onChangeText = {value => this.props.expensesUpdate({ prop: 'note', value})}
+              value = {this.props.notes}
+              onChangeText = {value => this.props.expensesUpdate({ prop: 'notes', value})}
             />
           </CardSection>
 
-          <TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={this.onButtonPress.bind(this)}>
             <View style={buttonStyle}>
              <Text style={buttonText}> Save </Text>
             </View>
@@ -153,9 +159,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { date, category, amount, note } = state.addExpenses;
+  const { date, category, amount, notes } = state.addExpenses;
 
-  return { date, category, amount, note };
+  return { date, category, amount, notes };
 };
 
-export default connect(mapStateToProps, { expensesUpdate }) (AddExpenses);
+export default connect(mapStateToProps, {
+  expensesUpdate, expensesCreate
+}) (AddExpenses);

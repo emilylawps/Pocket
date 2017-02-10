@@ -23,8 +23,9 @@ class LoginPage extends Component {
   };
 
   onButtonPress() {
-    const {email, password } = this.state;
 
+    const {email, password } = this.state;
+    
     this.setState({ error: '', loading: true});
 
     firebase.auth().signInWithEmailAndPassword(email, password)

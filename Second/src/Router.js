@@ -24,14 +24,14 @@ class RouterComponent extends Component {
         <Router>
           <Scene key="root">
             <Scene key="authentication"  hideNavBar component={Authentication}  initial={true} />
-            <Scene key="register" component={Register} />
-            <Scene key="forgotPassword" component={forgotPassword} />
-            <Scene key="menu" component={Menu} />
-            <Scene key="expenses" component={Expenses} />
-            <Scene key="addExpenses" component={AddExpenses} />
-            <Scene key="planning" component={Planning} />
-            <Scene key="addPlanning" component={AddPlanning} />
-            <Scene key="statistic" component={Statistic} />
+            <Scene key="register" hideNavBar component={Register} />
+            <Scene key="forgotPassword" hideNavBar component={forgotPassword} />
+            <Scene key="menu" hideNavBar component={Menu} />
+            <Scene key="expenses" hideNavBar component={Expenses} />
+            <Scene key="addExpenses" hideNavBar component={AddExpenses} />
+            <Scene key="planning" hideNavBar component={Planning} />
+            <Scene key="addPlanning" hideNavBar component={AddPlanning} />
+            <Scene key="statistic" hideNavBar component={Statistic} />
 
           </Scene>
         </Router>

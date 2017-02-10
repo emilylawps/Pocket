@@ -26,7 +26,10 @@ class Register extends Component {
     this.setState({ error: '', loading:true});
 
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then(this.onRegisterSuccess.bind(this))
+      .then(() => {
+        this.onRegisterSuccess.bind(this);
+        Actions.pop();
+      })
       .catch(() => {      //fail to create new account
         this.setState({ error: 'Failed to create new account. Please use a valid email.'});
       });
