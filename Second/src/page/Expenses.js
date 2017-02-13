@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import {
-  Text,
   View,
   TextInput,
   ListView
@@ -9,6 +8,7 @@ import {
 import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { expensesFetch } from './../actions';
+import ExpensesListItem from './ExpensesListItem';
 import Header from './../components/Header';
 
 class Expenses extends Component {
@@ -32,11 +32,13 @@ class Expenses extends Component {
     this.dataSource = ds.cloneWithRows( expenses );
   }
 
+  renderRow(expense) {
+      return <ExpensesListItem expense={expense} />;
+    }
 
 
   render(){
 
-    console.log(this.props);
     const {container, mainContainer} = styles;
 
     return(
@@ -46,8 +48,13 @@ class Expenses extends Component {
           Icon={(require('./../add.png'))}
           Page={(Actions.addExpenses)}
         />
-        <View style={mainContainer}>
 
+        <View style={mainContainer}>
+          <ListView
+            enableEmptySections
+            dataSource={this.dataSource}
+            renderRow={this.renderRow}
+          />
         </View>
       </View>
     );

@@ -1,6 +1,7 @@
 import {
   EXPENSES_UPDATE,
-  EXPENSES_CREATE
+  EXPENSES_CREATE,
+  EXPENSES_SAVE_SUCCESS
 } from './../actions/types';
 
 const INITIAL_STATE = {
@@ -15,6 +16,8 @@ export default (state = INITIAL_STATE, action) => {
     case EXPENSES_UPDATE:
       return { ...state, [action.payload.prop]: action.payload.value};
     case EXPENSES_CREATE:
+      return INITIAL_STATE;
+    case EXPENSES_SAVE_SUCCESS:
       return INITIAL_STATE;
     default:
      return state;
