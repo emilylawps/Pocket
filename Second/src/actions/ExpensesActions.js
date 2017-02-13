@@ -4,7 +4,8 @@ import {
   EXPENSES_UPDATE,
   EXPENSES_CREATE,
   EXPENSES_FETCH_SUCCESS,
-  EXPENSES_SAVE_SUCCESS
+  EXPENSES_SAVE_SUCCESS,
+  EXPENSES_CLEAR
 } from './types';
 
 export const expensesUpdate = ({ prop, value }) => {
@@ -62,4 +63,10 @@ export const expensesDelete = ({ uid }) => {
         Actions.pop();
       });
   };
+};
+
+export const expensesClear = () => {
+  return ({
+    type: EXPENSES_CLEAR
+  });
 };

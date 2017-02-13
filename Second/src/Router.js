@@ -13,10 +13,10 @@ import Menu from './page/Menu';
 import Expenses from './page/Expenses';
 import AddExpenses from './page/AddExpenses';
 import ExpensesEdit from './page/ExpensesEdit';
-import Planning from './page/Planning';
+import Plannings from './page/Plannings';
+import AddPlannings from './page/AddPlannings';
+import PlanningsEdit from './page/PlanningsEdit';
 import Statistic from './page/Statistic';
-import AddPlanning from './page/AddPlanning';
-
 
 class RouterComponent extends Component {
   render() {
@@ -31,8 +31,9 @@ class RouterComponent extends Component {
             <Scene key="expenses" hideNavBar component={Expenses} />
             <Scene key="expensesEdit" hideNavBar component={ExpensesEdit} />
             <Scene key="addExpenses" hideNavBar component={AddExpenses} />
-            <Scene key="planning" hideNavBar component={Planning} />
-            <Scene key="addPlanning" hideNavBar component={AddPlanning} />
+            <Scene key="plannings" hideNavBar component={Plannings} />
+            <Scene key="planningsEdit" hideNavBar component={PlanningsEdit} />
+            <Scene key="addPlannings" hideNavBar component={AddPlannings} />
             <Scene key="statistic" hideNavBar component={Statistic} />
 
           </Scene>

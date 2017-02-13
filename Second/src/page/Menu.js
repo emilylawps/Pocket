@@ -10,42 +10,47 @@ import {Actions} from 'react-native-router-flux';
 import Header from './../components/Header';
 // import ButtonComponent from 'react-native-button-component';
 
-const Menu = () => {
-  const {container, menuContainer, welcomeText, menuButton, menuText, logoutText, logoutButton} = styles;
-  return (
-    <View style={container}>
-     <Header Name={'Home'} />
-      <View style={menuContainer}>
+class Menu extends Component {
 
-      <Text style={welcomeText}>Welcome! Username</Text>
+  render() {
 
-      <TouchableNativeFeedback onPress={Actions.expenses}>
-        <View style={menuButton}>
-          <Text style={menuText}> Expenses </Text>
+    const {container, menuContainer, welcomeText, menuButton, menuText, logoutText, logoutButton} = styles;
+
+    return (
+      <View style={container}>
+       <Header Name={'Home'} />
+        <View style={menuContainer}>
+
+        <Text style={welcomeText}>Welcome! Username</Text>
+
+        <TouchableNativeFeedback onPress={Actions.expenses}>
+          <View style={menuButton}>
+            <Text style={menuText}> Expenses </Text>
+          </View>
+        </TouchableNativeFeedback>
+
+        <TouchableNativeFeedback onPress={Actions.plannings}>
+          <View style={menuButton}>
+            <Text style={menuText}> Planning </Text>
+          </View>
+        </TouchableNativeFeedback>
+
+        <TouchableNativeFeedback onPress={Actions.statistic}>
+          <View style={menuButton}>
+            <Text style={menuText}> Statistic </Text>
+          </View>
+        </TouchableNativeFeedback>
+
+        <TouchableNativeFeedback onPress={() => firebase.auth().signOut()}>
+          <View style={logoutButton} >
+            <Text style={logoutText}> Log Out </Text>
+          </View>
+        </TouchableNativeFeedback>
+
         </View>
-      </TouchableNativeFeedback>
-
-      <TouchableNativeFeedback onPress={Actions.planning}>
-        <View style={menuButton}>
-          <Text style={menuText}> Planning </Text>
-        </View>
-      </TouchableNativeFeedback>
-
-      <TouchableNativeFeedback onPress={Actions.statistic}>
-        <View style={menuButton}>
-          <Text style={menuText}> Statistic </Text>
-        </View>
-      </TouchableNativeFeedback>
-
-      <TouchableNativeFeedback onPress={() => firebase.auth().signOut()}>
-        <View style={logoutButton} >
-          <Text style={logoutText}> Log Out </Text>
-        </View>
-      </TouchableNativeFeedback>
-
       </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create ({

@@ -4,39 +4,39 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { expensesUpdate, expensesCreate, expensesClear } from './../actions';
+import { planningsUpdate, planningsCreate, planningsClear } from './../actions';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import CardSection from './../components/CardSection';
 import Header from './../components/Header';
-import ExpensesForm from './ExpensesForm';
+import PlanningsForm from './PlanningsForm';
 import Button from './../components/Button';
 
-class AddExpenses extends Component {
+class AddPlannings extends Component {
 
   componentWillMount() {
-    this.props.expensesClear();
+    this.props.planningsClear();
   }
 
   onButtonPress() {
     const { date, category, amount, notes} = this.props;
 
-    this.props.expensesCreate({ date, category: category || 'General', amount, notes});
+    this.props.planningsCreate({ date, category: category || 'General', amount, notes});
   }
 
   render(){
-    const {container, mainContainer } = styles;
+    const {container, mainContainer} = styles;
 
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
         <View style={container}>
-          <Header Name={'Add New Expenses'} />
+          <Header Name={'Add New Plans'} />
 
           <View style={mainContainer}>
 
-            <ExpensesForm {...this.props} />
-            <Button onPress={this.onButtonPress.bind(this)}>
-              Save
-            </Button>
+          <PlanningsForm {...this.props} />
+          <Button onPress={this.onButtonPress.bind(this)}>
+            Save
+          </Button>
 
           </View>
         </View>
@@ -58,11 +58,11 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { date, category, amount, notes } = state.addExpenses;
+  const { date, category, amount, notes } = state.addPlannings;
 
   return { date, category, amount, notes };
 };
 
 export default connect(mapStateToProps, {
-  expensesUpdate, expensesCreate, expensesClear
-}) (AddExpenses);
+  planningsUpdate, planningsCreate, planningsClear
+}) (AddPlannings);
