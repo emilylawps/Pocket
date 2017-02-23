@@ -10,7 +10,7 @@ const Spinner = ({spinnerSize}) => {
      <ActivityIndicator size={spinnerSize || 'large'} />
     </View>
   );
-}
+};
 
 const styles = {
   spinnerStyle:{

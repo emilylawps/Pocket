@@ -5,6 +5,7 @@ import {
   View,
   TextInput,
   Button,
+  KeyboardAvoidingView,
   TouchableWithoutFeedback
 } from 'react-native';
 import firebase from 'firebase';
@@ -53,36 +54,38 @@ class Register extends Component {
         <View style={container}>
           <Text style={titleName}>POCKET</Text>
 
-          <TextInput
-            placeholder="Username"
-            label="Username"
-            value = { this.state.username }
-            onChangeText = {username => this.setState({ username })}
-          />
+          <KeyboardAvoidingView behavior = 'padding'>
+            <TextInput
+              placeholder="Username"
+              label="Username"
+              value = { this.state.username }
+              onChangeText = {username => this.setState({ username })}
+            />
 
-          <TextInput
-            placeholder="Email"
-            label="Email"
-            keyboardType= 'email-address'
-            value = { this.state.email }
-            onChangeText = {email => this.setState({ email })}
-          />
+            <TextInput
+              placeholder="Email"
+              label="Email"
+              keyboardType= 'email-address'
+              value = { this.state.email }
+              onChangeText = {email => this.setState({ email })}
+            />
 
-          <TextInput
-            placeholder="Password"
-            label="Password"
-            secureTextEntry
-            value = { this.state.password }
-            onChangeText = {password => this.setState({ password })}
-          />
+            <TextInput
+              placeholder="Password"
+              label="Password"
+              secureTextEntry
+              value = { this.state.password }
+              onChangeText = {password => this.setState({ password })}
+            />
 
-          <Text style={errorText}>
-            {this.state.error}
-          </Text>
+            <Text style={errorText}>
+              {this.state.error}
+            </Text>
 
-          <View style={loginBar}>
-            <Button onPress={this.onButtonPress.bind(this)} title="REGISTER"/>
-          </View>
+            <View style={loginBar}>
+              <Button onPress={this.onButtonPress.bind(this)} title="REGISTER"/>
+            </View>
+          </KeyboardAvoidingView>
         </View>
       </TouchableWithoutFeedback>
     );

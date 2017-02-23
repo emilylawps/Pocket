@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {
+  Text,
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { expensesUpdate, expensesCreate, expensesClear } from './../actions';
+import moment from 'moment';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
 import CardSection from './../components/CardSection';
 import Header from './../components/Header';
@@ -12,19 +14,37 @@ import ExpensesForm from './ExpensesForm';
 import Button from './../components/Button';
 
 class AddExpenses extends Component {
+  state = { error:'' };
 
   componentWillMount() {
     this.props.expensesClear();
   }
 
   onButtonPress() {
-    const { date, category, amount, notes} = this.props;
+    const { date, category, amount, notes, month} = this.props;
 
-    this.props.expensesCreate({ date, category: category || 'General', amount, notes});
+    // if (date === '') {
+    //     this.setState({ error: 'Select a date' });
+    //
+    // }
+    // else
+    if (amount === ''|| amount <= 0) {
+        this.setState({ error: 'Enter a valid amount' });
+    }
+    else{
+      this.setState({error: ''});
+      this.props.expensesCreate({
+        date: moment().format('L'),
+        category: category || 'General',
+        amount,
+        notes,
+        month: moment().format('MMMM YYYY')
+      });
+    }
   }
 
   render(){
-    const {container, mainContainer } = styles;
+    const {container, mainContainer, errorText } = styles;
 
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
@@ -34,6 +54,9 @@ class AddExpenses extends Component {
           <View style={mainContainer}>
 
             <ExpensesForm {...this.props} />
+            <Text style={errorText}>
+              {this.state.error}
+            </Text>
             <Button onPress={this.onButtonPress.bind(this)}>
               Save
             </Button>
@@ -50,6 +73,13 @@ const styles = {
     flex: 1
   },
 
+  errorText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'red',
+    paddingVertical: 5,
+  },
+
   mainContainer: {
     flex: 12,
     backgroundColor: 'beige',
@@ -58,9 +88,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { date, category, amount, notes } = state.addExpenses;
+  const { date, category, amount, notes, month } = state.addExpenses;
 
-  return { date, category, amount, notes };
+  return { date, category, amount, notes, month };
 };
 
 export default connect(mapStateToProps, {

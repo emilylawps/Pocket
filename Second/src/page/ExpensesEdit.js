@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import {
+  Text,
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -14,7 +15,7 @@ import ConfirmDelete from './../components/ConfirmDelete';
 // import { Card, CardSection } from './../components';
 
 class ExpensesEdit extends Component {
-  state = {showModal: false};
+  state = {error:'', showModal: false};
 
   componentWillMount() {
     _.each(this.props.expense, (value, prop) => {
@@ -23,9 +24,19 @@ class ExpensesEdit extends Component {
   }
 
   onButtonPress() {
-    const { date, category, amount, notes } = this.props;
+    const { date, category, amount, notes, month } = this.props;
 
-    this.props.expensesSave({ date, category, amount, notes, uid: this.props.expense.uid });
+    // if (date === '') {
+    //     this.setState({ error: 'Select a date' });
+    // }
+    // else
+    if (amount === ''|| amount <= 0) {
+        this.setState({ error: 'Enter a valid amount' });
+    }
+    else {
+      this.setState({error: ''});
+      this.props.expensesSave({date, category, amount, notes, month, uid: this.props.expense.uid });
+    }
   }
 
   onAccept() {
@@ -39,7 +50,7 @@ class ExpensesEdit extends Component {
   }
 
   render() {
-    const {container, mainContainer} = styles;
+    const {container, mainContainer, errorText} = styles;
 
     return (
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
@@ -48,7 +59,9 @@ class ExpensesEdit extends Component {
 
           <View style={mainContainer}>
             <ExpensesForm />
-
+            <Text style={errorText}>
+              {this.state.error}
+            </Text>
             <Button onPress={this.onButtonPress.bind(this)}>
               Save Changes
             </Button>
@@ -77,6 +90,13 @@ const styles = {
     flex: 1
   },
 
+  errorText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'red',
+    paddingTop: 5,
+  },
+
   mainContainer: {
     flex: 12,
     backgroundColor: 'beige',
@@ -85,9 +105,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { date, category, amount, notes } = state.addExpenses;
+  const { date, category, amount, notes, month } = state.addExpenses;
 
-  return { date, category, amount, notes };
+  return { date, category, amount, notes, month };
 };
 
 export default connect (mapStateToProps, {

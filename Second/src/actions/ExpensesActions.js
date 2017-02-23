@@ -16,12 +16,12 @@ export const expensesUpdate = ({ prop, value }) => {
 };
 
 
-export const expensesCreate = ({ date, category, amount, notes }) => {
+export const expensesCreate = ({ date, category, amount, notes, month }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/expenses`)
-      .push({ date, category, amount, notes })
+      .push({ date, category, amount, notes, month })
       .then(() => {
         dispatch({ type: EXPENSES_CREATE});
         Actions.pop();
@@ -40,12 +40,12 @@ export const expensesFetch = () => {
   };
 };
 
-export const expensesSave = ({ date, category, amount, notes, uid }) => {
+export const expensesSave = ({date, category, amount, notes, month, uid }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/expenses/${uid}`)
-    .set({ date, category, amount, notes })
+    .set({ date, category, amount, notes, month })
     .then(() => {
       dispatch({ type: EXPENSES_SAVE_SUCCESS });
       Actions.pop();

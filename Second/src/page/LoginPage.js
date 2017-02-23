@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
   View,
   TextInput,
   Button,
+  KeyboardAvoidingView,
   TouchableNativeFeedback,
   TouchableWithoutFeedback,
 } from 'react-native';
 import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
 import dismissKeyboard from 'react-native-dismiss-keyboard';
-// import {Spinner} from './../components/Spinner';
-// import ButtonComponent, { RectangleButton } from 'react-native-button-component';
+// import Spinner from './../components/Spinner';
 
 class LoginPage extends Component {
   state = {
@@ -25,7 +24,7 @@ class LoginPage extends Component {
   onButtonPress() {
 
     const {email, password } = this.state;
-    
+
     this.setState({ error: '', loading: true});
 
     firebase.auth().signInWithEmailAndPassword(email, password)
@@ -43,65 +42,74 @@ class LoginPage extends Component {
       error: ''
     });
   }
-  //
+
   // renderButton() {
   //   if (this.state.loading) {
-  //     return <Spinner size = "small" />;
+  //     return <Spinner size = "large" />;
   //   }
+  //
+  //   return (
+  //     <Button onPress={this.onButtonPress.bind(this)} title="LOGIN"/>
+  //   );
+  // }
 
   render(){
     const{container, titleName, middleContainer, bottomContainer, loginBar, bottomText, errorText} = styles;
 
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
-      <View style={container}>
+        <View style={container}>
 
-        <View style={middleContainer}>
-          <Text style={titleName}>POCKET</Text>
-
-            <TextInput
-              placeholder="Email"
-              label="Email"
-              keyboardType= 'email-address'
-              value = { this.state.email }
-              onChangeText = {email => this.setState({ email })}
-            />
-
-            <TextInput
-              placeholder="Password"
-              label="Password"
-              secureTextEntry
-              value = { this.state.password }
-              onChangeText = {password => this.setState({ password })}
-            />
-
-            <Text style={errorText}>
-              {this.state.error}
-            </Text>
-
-          <View style={loginBar}>
-
-            <Button onPress={this.onButtonPress.bind(this)} title="LOGIN"/>
-
-            <Button onPress={Actions.register} title="Register an account"/>
-          </View>
-        </View>
-
-        <View style={bottomContainer}>
-          <TouchableNativeFeedback onPress={Actions.forgotPassword}>
+          <KeyboardAvoidingView
+            behavior = 'padding'
+            style={middleContainer}
+          >
             <View>
-              <Text style={bottomText}>Forgot password?</Text>
-            </View>
-          </TouchableNativeFeedback>
-        </View>
+              <Text style={titleName}>POCKET</Text>
 
-      </View>
+                <TextInput
+                  placeholder="Email"
+                  label="Email"
+                  keyboardType= 'email-address'
+                  value = { this.state.email }
+                  onChangeText = {email => this.setState({ email })}
+                />
+
+                <TextInput
+                  placeholder="Password"
+                  label="Password"
+                  secureTextEntry
+                  value = { this.state.password }
+                  onChangeText = {password => this.setState({ password })}
+                />
+
+                <Text style={errorText}>
+                  {this.state.error}
+                </Text>
+
+              <View style={loginBar}>
+                <Button onPress={this.onButtonPress.bind(this)} title="LOGIN"/>
+                <Button onPress={Actions.register} title="Register an account"/>
+              </View>
+            </View>
+          </KeyboardAvoidingView>
+
+          <View style={bottomContainer}>
+            <TouchableNativeFeedback onPress={Actions.forgotPassword}>
+              <View>
+                <Text style={bottomText}>Forgot password?</Text>
+              </View>
+            </TouchableNativeFeedback>
+          </View>
+
+        </View>
       </TouchableWithoutFeedback>
     );
   }
 }
 
-const styles = StyleSheet.create ({
+
+const styles = {
   container: {
     flex: 1,
     backgroundColor: 'linen',
@@ -166,6 +174,6 @@ const styles = StyleSheet.create ({
   //   height: 40,
   //   width: 80
   // },
-});
+};
 
 export default LoginPage;

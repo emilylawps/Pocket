@@ -6,7 +6,6 @@ import {
 } from './../actions/types';
 
 const INITIAL_STATE = {
-  date: '',
   category: '',
   amount: '',
   notes: ''

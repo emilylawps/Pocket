@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import {
+  Text,
   View,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -14,7 +15,7 @@ import ConfirmDelete from './../components/ConfirmDelete';
 // import { Card, CardSection } from './../components';
 
 class PlanningsEdit extends Component {
-  state = {showModal: false};
+  state = {error:'', showModal: false};
 
   componentWillMount() {
     _.each(this.props.planning, (value, prop) => {
@@ -25,7 +26,13 @@ class PlanningsEdit extends Component {
   onButtonPress() {
     const { date, category, amount, notes } = this.props;
 
-    this.props.planningsSave({ date, category, amount, notes, uid: this.props.planning.uid });
+    if (amount === ''|| amount <= 0) {
+        this.setState({ error: 'Enter a valid amount' });
+    }
+    else {
+      this.setState({error: ''});
+      this.props.planningsSave({ date, category, amount, notes, uid: this.props.planning.uid });
+    }
   }
 
   onAccept() {
@@ -39,7 +46,7 @@ class PlanningsEdit extends Component {
   }
 
   render() {
-    const {container, mainContainer} = styles;
+    const {container, mainContainer, errorText} = styles;
 
     return (
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
@@ -48,7 +55,9 @@ class PlanningsEdit extends Component {
 
           <View style={mainContainer}>
             <PlanningsForm />
-
+            <Text style={errorText}>
+              {this.state.error}
+            </Text>
             <Button onPress={this.onButtonPress.bind(this)}>
               Save Changes
             </Button>
@@ -75,6 +84,13 @@ class PlanningsEdit extends Component {
 const styles = {
   container: {
     flex: 1
+  },
+
+  errorText: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    color: 'red',
+    paddingTop: 5,
   },
 
   mainContainer: {

@@ -8,10 +8,16 @@ import {
 import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { expensesFetch } from './../actions';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
+import CardSection from './../components/CardSection';
 import ExpensesListItem from './ExpensesListItem';
 import Header from './../components/Header';
 
 class Expenses extends Component {
+
+  // state = { date : moment().format('L')};
+
   componentWillMount() {
     this.props.expensesFetch();
     this.createDataSource(this.props);
@@ -36,10 +42,9 @@ class Expenses extends Component {
       return <ExpensesListItem expense={expense} />;
     }
 
-
   render(){
 
-    const {container, mainContainer} = styles;
+    const {container, mainContainer, datePickerStyle, pickerText} = styles;
 
     return(
       <View style={container}>
@@ -50,6 +55,20 @@ class Expenses extends Component {
         />
 
         <View style={mainContainer}>
+
+        <CardSection style={{alignItems: 'center'}}>
+          <View style={datePickerStyle}>
+            <DatePicker
+              style={{ flex: 1}}
+              date = {this.props.date}
+              placeholder="tap to select date"
+              format="DD/MM/YYYY"
+              showIcon={false}
+              onDateChange={value => this.props.expensesFetch({ prop: 'date', value})}
+            />
+          </View>
+        </CardSection>
+
           <ListView
             enableEmptySections
             dataSource={this.dataSource}
@@ -70,6 +89,21 @@ const styles = {
     flex: 12,
     // elevation: 5,
     backgroundColor: 'beige'
+  },
+
+  datePickerStyle: {
+     flex: 2,
+     flexDirection: 'row',
+     padding: 5,
+    //  backgroundColor: 'blue'
+  },
+
+  pickerText: {
+    // backgroundColor: 'yellow',
+    color: 'darkslategrey',
+    fontSize: 18,
+    paddingLeft: 10,
+    flex: 1
   }
 };
 
