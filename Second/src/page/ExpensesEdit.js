@@ -35,7 +35,13 @@ class ExpensesEdit extends Component {
     }
     else {
       this.setState({error: ''});
-      this.props.expensesSave({date, category, amount, notes, month, uid: this.props.expense.uid });
+      this.props.expensesSave({
+        date,
+        category,
+        amount,
+        notes,
+        month,
+        uid: this.props.expense.uid });
     }
   }
 

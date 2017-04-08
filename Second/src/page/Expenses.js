@@ -16,10 +16,12 @@ import Header from './../components/Header';
 
 class Expenses extends Component {
 
-  // state = { date : moment().format('L')};
+  state = { date : moment().format('L')};
+
 
   componentWillMount() {
-    this.props.expensesFetch();
+    const {date} = this.props;
+    this.props.expensesFetch(this.state.date);
     this.createDataSource(this.props);
   }
 
@@ -27,7 +29,6 @@ class Expenses extends Component {
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
-
     this.createDataSource(nextProps);
   }
 
@@ -41,6 +42,12 @@ class Expenses extends Component {
   renderRow(expense) {
       return <ExpensesListItem expense={expense} />;
     }
+
+  search(date) {
+    this.setState({date: date});
+    console.log(date);
+    this.props.expensesFetch(date);
+  }
 
   render(){
 
@@ -60,11 +67,11 @@ class Expenses extends Component {
           <View style={datePickerStyle}>
             <DatePicker
               style={{ flex: 1}}
-              date = {this.props.date}
+              date = {this.state.date}
               placeholder="tap to select date"
-              format="DD/MM/YYYY"
+              format="MM/DD/YYYY"
               showIcon={false}
-              onDateChange={value => this.props.expensesFetch({ prop: 'date', value})}
+              onDateChange={(date) => this.search(date)}
             />
           </View>
         </CardSection>

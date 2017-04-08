@@ -8,13 +8,14 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { expensesUpdate } from './../actions';
+import moment from 'moment';
 import CardSection from './../components/CardSection';
 import Input from './../components/Input';
 
 class ExpensesForm extends Component {
 
   render() {
-    const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText} = styles;
+    const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText, dateStyle} = styles;
 
     return (
         <View>
@@ -85,7 +86,6 @@ const styles = {
     fontSize: 18,
     lineHeight: 23,
     // backgroundColor: 'yellow',
-    // flex: 2
   },
 
   labelStyle: {
@@ -94,15 +94,7 @@ const styles = {
     paddingLeft: 10,
     paddingVertical: 10,
     // backgroundColor: 'blue'
-    // flex: 1
   },
-  //
-  // datePickerStyle: {
-  //    flex: 2,
-  //    flexDirection: 'row',
-  //    padding: 5,
-  //   //  backgroundColor: 'blue'
-  // },
 
   pickerText: {
     // backgroundColor: 'yellow',
@@ -110,6 +102,12 @@ const styles = {
     fontSize: 18,
     paddingLeft: 10,
     flex: 1
+  },
+
+  dateStyle: {
+    color: 'black',
+    fontSize: 18,
+    padding: 10
   }
 };
 

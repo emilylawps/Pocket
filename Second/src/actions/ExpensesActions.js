@@ -25,19 +25,29 @@ export const expensesCreate = ({ date, category, amount, notes, month }) => {
       .then(() => {
         dispatch({ type: EXPENSES_CREATE});
         Actions.pop();
+        JSON.stringify(date);
       });
   };
 };
 
-export const expensesFetch = () => {
+export const expensesFetch = (date) => {
   const { currentUser } = firebase.auth();
-
   return (dispatch) => {
-    firebase.database().ref(`/users/${currentUser.uid}/expenses`)
-      .on('value', snapshot => {
-        dispatch({ type: EXPENSES_FETCH_SUCCESS, payload: snapshot.val() });
-      });
-  };
+      firebase.database().ref(`/users/${currentUser.uid}/expenses`)
+        .orderByChild('date')
+        .equalTo(date)
+        .on('value', function(snap) {
+          dispatch({ type: EXPENSES_FETCH_SUCCESS, payload: snap.val() });
+            console.log(date, snap.val())
+        });
+    };
+
+  // return (dispatch) => {
+  //   firebase.database().ref(`/users/${currentUser.uid}/expenses`)
+  //     .on('value', snapshot => {
+  //       dispatch({ type: EXPENSES_FETCH_SUCCESS, payload: snapshot.val() });
+  //     });
+  // };
 };
 
 export const expensesSave = ({date, category, amount, notes, month, uid }) => {

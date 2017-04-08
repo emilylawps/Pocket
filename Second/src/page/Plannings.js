@@ -8,11 +8,16 @@ import {
 import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { planningsFetch } from './../actions';
+import CardSection from './../components/CardSection';
 import PlanningsListItem from './PlanningsListItem';
 import Header from './../components/Header';
 
 class Plannings extends Component {
+
+  // state = { date: moment().format('MMMM YYYY') };
+
   componentWillMount() {
+    // const {date} = this.props;
     this.props.planningsFetch();
     this.createDataSource(this.props);
   }
@@ -21,7 +26,6 @@ class Plannings extends Component {
     // nextProps are the next set of props that this component
     // will be rendered with
     // this.props is still the old set of props
-
     this.createDataSource(nextProps);
   }
 
@@ -36,8 +40,14 @@ class Plannings extends Component {
       return <PlanningsListItem planning={planning} />;
     }
 
+  // search(date) {
+  //   this.setState({date: date});
+  //   console.log(date);
+  //   this.props.planningsFetch(date);
+  // }
+
   render(){
-    const{container, mainContainer} = styles;
+    const{container, mainContainer, datePickerStyle, pickerText} = styles;
 
     return(
       <View style={container}>
@@ -48,6 +58,7 @@ class Plannings extends Component {
         />
 
         <View style={mainContainer}>
+
           <ListView
             enableEmptySections
             dataSource={this.dataSource}

@@ -16,9 +16,6 @@ class ExpensesListItem extends Component {
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
       <View>
         <CardSection style={{flexDirection: 'column'}}>
-          <Text style={titleStyle}>
-            {date}
-          </Text>
 
           <View style={containerStyle}>
             <Text style={categoryStyle}>

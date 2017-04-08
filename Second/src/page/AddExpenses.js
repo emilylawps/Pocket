@@ -23,11 +23,6 @@ class AddExpenses extends Component {
   onButtonPress() {
     const { date, category, amount, notes, month} = this.props;
 
-    // if (date === '') {
-    //     this.setState({ error: 'Select a date' });
-    //
-    // }
-    // else
     if (amount === ''|| amount <= 0) {
         this.setState({ error: 'Enter a valid amount' });
     }

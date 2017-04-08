@@ -20,7 +20,6 @@ import Statistic from './page/Statistic';
 
 class RouterComponent extends Component {
   render() {
-    // const {container} = styles;
     return(
         <Router>
           <Scene key="root">

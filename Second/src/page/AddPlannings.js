@@ -43,7 +43,7 @@ class AddPlannings extends Component {
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
         <View style={container}>
-          <Header Name={'Add New Plans'} />
+          <Header Name={'Planning Of The Month'} />
 
           <View style={mainContainer}>
 
