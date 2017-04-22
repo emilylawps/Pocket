@@ -16,13 +16,14 @@ export const planningsUpdate = ({ prop, value }) => {
 };
 
 
-export const planningsCreate = ({ date, category, amount, notes }) => {
+export const planningsCreate = ({ date, category, amount, notes, month }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/plannings`)
-      .push({ date, category, amount, notes })
+      .push({ date, category, amount, notes, month })
       .then(() => {
+        console.log(month)
         dispatch({ type: PLANNINGS_CREATE});
         Actions.pop();
       });
@@ -40,12 +41,12 @@ export const planningsFetch = () => {
   };
 };
 
-export const planningsSave = ({ date, category, amount, notes, uid }) => {
+export const planningsSave = ({ date, category, amount, notes, month, uid }) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/plannings/${uid}`)
-    .set({ date, category, amount, notes })
+    .set({ date, category, amount, notes, month })
     .then(() => {
       dispatch({ type: PLANNINGS_SAVE_SUCCESS });
       Actions.pop();

@@ -8,16 +8,30 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { planningsUpdate } from './../actions';
+import DatePicker from 'react-native-datepicker';
+const moment = require('moment')
 import CardSection from './../components/CardSection';
 import Input from './../components/Input';
 
 class PlanningsForm extends Component {
 
   render() {
-    const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText} = styles;
-
+    const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText, datePickerStyle} = styles;
     return (
         <View>
+          <CardSection style={{alignItems: 'center'}}>
+            <View style={datePickerStyle}>
+              <DatePicker
+                style={{ flex: 1}}
+                date = {this.props.date}
+                placeholder="tap to select date"
+                format="DD/MM/YYYY"
+                showIcon={false}
+                onDateChange={value => this.props.planningsUpdate({prop: 'date', value})}
+              />
+            </View>
+          </CardSection>
+
           <CardSection style={{alignItems: 'center'}}>
             <Text style={pickerText}>Category</Text>
             <Picker
@@ -96,13 +110,13 @@ const styles = {
     // backgroundColor: 'blue'
     // flex: 1
   },
-  //
-  // datePickerStyle: {
-  //    flex: 2,
-  //    flexDirection: 'row',
-  //    padding: 5,
-  //   //  backgroundColor: 'blue'
-  // },
+
+  datePickerStyle: {
+     flex: 2,
+     flexDirection: 'row',
+     padding: 5,
+    //  backgroundColor: 'blue'
+  },
 
   pickerText: {
     // backgroundColor: 'yellow',
@@ -114,9 +128,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { category, amount, notes } = state.addPlannings;
+  const { date, category, amount, notes, month } = state.addPlannings;
 
-  return { category, amount, notes };
+  return { date, category, amount, notes, month };
 }
 
 export default connect(mapStateToProps, {planningsUpdate})(PlanningsForm);

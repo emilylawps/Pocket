@@ -8,17 +8,37 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { expensesUpdate } from './../actions';
-import moment from 'moment';
+import DatePicker from 'react-native-datepicker';
+const moment = require('moment')
 import CardSection from './../components/CardSection';
 import Input from './../components/Input';
 
 class ExpensesForm extends Component {
+  // changeDate(date) {
+  //   selectedFullDate = new moment(date, "DD/MM/YYYY")
+  //   date = moment(selectedFullDate).format("DD/MM/YYYY")
+  //   month = moment(selectedFullDate).format('MMMM YYYY')
+  //
+  //   this.setState({date : date});
+  // }
 
   render() {
-    const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText, dateStyle} = styles;
-
+    const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText, datePickerStyle, dateStyle} = styles;
     return (
         <View>
+          <CardSection style={{alignItems: 'center'}}>
+            <View style={datePickerStyle}>
+              <DatePicker
+                style={{ flex: 1}}
+                date = {this.props.date}
+                placeholder="tap to select date"
+                format="DD/MM/YYYY"
+                showIcon={false}
+                onDateChange={value => this.props.expensesUpdate({prop: 'date', value})}
+              />
+            </View>
+          </CardSection>
+
           <CardSection style={{alignItems: 'center'}}>
             <Text style={pickerText}>Category</Text>
             <Picker
@@ -104,6 +124,13 @@ const styles = {
     flex: 1
   },
 
+  datePickerStyle: {
+     flex: 2,
+     flexDirection: 'row',
+     padding: 5,
+    //  backgroundColor: 'blue'
+  },
+
   dateStyle: {
     color: 'black',
     fontSize: 18,
@@ -112,9 +139,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { category, amount, notes } = state.addExpenses;
+  const { date, category, amount, notes, month } = state.addExpenses;
 
-  return { category, amount, notes };
+  return { date, category, amount, notes, month };
 }
 
 export default connect(mapStateToProps, {expensesUpdate})(ExpensesForm);

@@ -8,16 +8,15 @@ import {
 import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { planningsFetch } from './../actions';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 import CardSection from './../components/CardSection';
 import PlanningsListItem from './PlanningsListItem';
 import Header from './../components/Header';
 
 class Plannings extends Component {
 
-  // state = { date: moment().format('MMMM YYYY') };
-
   componentWillMount() {
-    // const {date} = this.props;
     this.props.planningsFetch();
     this.createDataSource(this.props);
   }

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import firebase from 'firebase';
 import {Actions} from 'react-native-router-flux';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+const dismissKeyboard = require('dismissKeyboard')
 // import Spinner from './../components/Spinner';
 
 class LoginPage extends Component {

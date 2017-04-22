@@ -8,7 +8,8 @@ import {
 import { connect } from 'react-redux';
 import PlanningsForm from './PlanningsForm';
 import {planningsUpdate, planningsSave, planningsDelete } from './../actions';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+const moment = require('moment')
+const dismissKeyboard = require('dismissKeyboard')
 import Header from './../components/Header';
 import Button from './../components/Button';
 import ConfirmDelete from './../components/ConfirmDelete';
@@ -24,14 +25,29 @@ class PlanningsEdit extends Component {
   }
 
   onButtonPress() {
-    const { date, category, amount, notes } = this.props;
+    const { date, category, amount, notes, month } = this.props;
 
-    if (amount === ''|| amount <= 0) {
+    if (date == null) {
+        this.setState({ error: 'Select a date' });
+    }
+    else if (amount === ''|| amount <= 0) {
         this.setState({ error: 'Enter a valid amount' });
     }
     else {
       this.setState({error: ''});
-      this.props.planningsSave({ date, category, amount, notes, uid: this.props.planning.uid });
+      selectedFullDate = new moment(date, "DD/MM/YYYY")
+      selectedDate = moment(selectedFullDate).format("DD/MM/YYYY")
+      selectedMonth = moment(selectedFullDate).format('MMMM YYYY')
+      console.log(selectedMonth)
+      
+      this.props.planningsSave({
+        date: selectedDate,
+        category: category || 'General',
+        amount,
+        notes,
+        month: selectedMonth,
+        uid: this.props.planning.uid
+      });
     }
   }
 
@@ -101,9 +117,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { date, category, amount, notes } = state.addPlannings;
+  const { date, category, amount, notes, month } = state.addPlannings;
 
-  return { date, category, amount, notes };
+  return { date, category, amount, notes, month };
 };
 
 export default connect (mapStateToProps, {

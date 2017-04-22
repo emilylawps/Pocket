@@ -6,9 +6,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { planningsUpdate, planningsCreate, planningsClear } from './../actions';
-import moment from 'moment';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
-import CardSection from './../components/CardSection';
+const moment = require('moment')
+const dismissKeyboard = require('dismissKeyboard')
 import Header from './../components/Header';
 import PlanningsForm from './PlanningsForm';
 import Button from './../components/Button';
@@ -21,18 +20,26 @@ class AddPlannings extends Component {
   }
 
   onButtonPress() {
-    const { date, category, amount, notes} = this.props;
+    const { date, category, amount, notes, month} = this.props;
 
-    if (amount === ''|| amount <= 0) {
+    if (date == null) {
+        this.setState({error: 'Select a date'});
+    }
+    else if (amount === ''|| amount <= 0) {
         this.setState({ error: 'Enter a valid amount' });
     }
     else {
       this.setState({error: ''});
+      selectedFullDate = new moment(date, "DD/MM/YYYY")
+      selectedDate = moment(selectedFullDate).format("DD/MM/YYYY")
+      selectedMonth = moment(selectedFullDate).format('MMMM YYYY')
+
       this.props.planningsCreate({
-        date: moment().format('MMMM YYYY'),
+        date: selectedDate,
         category: category || 'General',
         amount,
-        notes
+        notes,
+        month: selectedMonth
       });
     }
   }
@@ -82,9 +89,9 @@ const styles = {
 };
 
 const mapStateToProps = (state) => {
-  const { date, category, amount, notes } = state.addPlannings;
+  const { date, category, amount, notes, month } = state.addPlannings;
 
-  return { date, category, amount, notes };
+  return { date, category, amount, notes, month };
 };
 
 export default connect(mapStateToProps, {

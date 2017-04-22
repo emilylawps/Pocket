@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import  CardSection  from './../components/CardSection';
+import  Card  from './../components/Card';
 
 class ExpensesListItem extends Component {
   onRowPress() {
@@ -14,21 +15,28 @@ class ExpensesListItem extends Component {
 
     return (
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
-      <View>
-        <CardSection style={{flexDirection: 'column'}}>
+        <View>
 
-          <View style={containerStyle}>
-            <Text style={categoryStyle}>
-              {category}
+          <Card>
+            <Text style={titleStyle}>
+              {date}
             </Text>
 
-            <Text style={amountStyle}>
-            RM {amount}
-            </Text>
+            <CardSection style={{flexDirection: 'column'}}>
+              <View style={containerStyle}>
+                <Text style={categoryStyle}>
+                  {category}
+                </Text>
 
-          </View>
-        </CardSection>
-      </View>
+                <Text style={amountStyle}>
+                RM {amount}
+                </Text>
+
+              </View>
+            </CardSection>
+
+          </Card>
+        </View>
       </TouchableWithoutFeedback>
     );
   }

@@ -7,12 +7,12 @@ import {
 } from 'react-native';
 
 import Header from './../components/Header';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+const dismissKeyboard = require('dismissKeyboard')
 
 class forgotPassword extends Component {
   render(){
     const{container, container2} = styles;
-    
+
     return (
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
         <View style={container}>

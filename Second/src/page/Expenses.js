@@ -8,20 +8,16 @@ import {
 import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { expensesFetch } from './../actions';
-import DatePicker from 'react-native-datepicker';
-import moment from 'moment';
+// import DatePicker from 'react-native-datepicker';
+// import moment from 'moment';
 import CardSection from './../components/CardSection';
 import ExpensesListItem from './ExpensesListItem';
 import Header from './../components/Header';
 
 class Expenses extends Component {
 
-  state = { date : moment().format('L')};
-
-
   componentWillMount() {
-    const {date} = this.props;
-    this.props.expensesFetch(this.state.date);
+    this.props.expensesFetch();
     this.createDataSource(this.props);
   }
 
@@ -43,14 +39,13 @@ class Expenses extends Component {
       return <ExpensesListItem expense={expense} />;
     }
 
-  search(date) {
-    this.setState({date: date});
-    console.log(date);
-    this.props.expensesFetch(date);
-  }
+  // search(date) {
+  //   this.setState({date: date});
+  //   // console.log(date);
+  //   this.props.expensesFetch(date);
+  // }
 
   render(){
-
     const {container, mainContainer, datePickerStyle, pickerText} = styles;
 
     return(
@@ -62,20 +57,6 @@ class Expenses extends Component {
         />
 
         <View style={mainContainer}>
-
-        <CardSection style={{alignItems: 'center'}}>
-          <View style={datePickerStyle}>
-            <DatePicker
-              style={{ flex: 1}}
-              date = {this.state.date}
-              placeholder="tap to select date"
-              format="MM/DD/YYYY"
-              showIcon={false}
-              onDateChange={(date) => this.search(date)}
-            />
-          </View>
-        </CardSection>
-
           <ListView
             enableEmptySections
             dataSource={this.dataSource}

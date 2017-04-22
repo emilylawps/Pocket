@@ -8,7 +8,8 @@ import {
 import { connect } from 'react-redux';
 import ExpensesForm from './ExpensesForm';
 import {expensesUpdate, expensesSave, expensesDelete } from './../actions';
-import dismissKeyboard from 'react-native-dismiss-keyboard';
+const moment = require('moment')
+const dismissKeyboard = require('dismissKeyboard')
 import Header from './../components/Header';
 import Button from './../components/Button';
 import ConfirmDelete from './../components/ConfirmDelete';
@@ -26,22 +27,27 @@ class ExpensesEdit extends Component {
   onButtonPress() {
     const { date, category, amount, notes, month } = this.props;
 
-    // if (date === '') {
-    //     this.setState({ error: 'Select a date' });
-    // }
-    // else
-    if (amount === ''|| amount <= 0) {
+    if (date == null) {
+        this.setState({ error: 'Select a date' });
+    }
+    else if (amount === ''|| amount <= 0) {
         this.setState({ error: 'Enter a valid amount' });
     }
     else {
       this.setState({error: ''});
+      selectedFullDate = new moment(date, "DD/MM/YYYY")
+      selectedDate = moment(selectedFullDate).format("DD/MM/YYYY")
+      selectedMonth = moment(selectedFullDate).format('MMMM YYYY')
+      console.log(selectedDate)
+
       this.props.expensesSave({
-        date,
+        date: selectedDate,
         category,
         amount,
         notes,
-        month,
-        uid: this.props.expense.uid });
+        month: selectedMonth,
+        uid: this.props.expense.uid
+      });
     }
   }
 
