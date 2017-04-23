@@ -9,16 +9,22 @@ import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { planningsFetch } from './../actions';
 import DatePicker from 'react-native-datepicker';
-import moment from 'moment';
+const moment = require('moment')
 import CardSection from './../components/CardSection';
 import PlanningsListItem from './PlanningsListItem';
 import Header from './../components/Header';
 
 class Plannings extends Component {
 
+  state = {
+    date: new Date(),
+  };
+
   componentWillMount() {
-    this.props.planningsFetch();
+    month = moment(this.state.date).format('MMMM YYYY')
+    this.props.planningsFetch(month);
     this.createDataSource(this.props);
+    // console.log(month)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -39,11 +45,13 @@ class Plannings extends Component {
       return <PlanningsListItem planning={planning} />;
     }
 
-  // search(date) {
-  //   this.setState({date: date});
-  //   console.log(date);
-  //   this.props.planningsFetch(date);
-  // }
+  search(month) {
+    // selectedFullDate = new moment(date, "MMMM YYYY")
+    // date = moment(selectedFullDate).format("MMMM YYYY")
+    // month = moment(selectedFullDate).format('MMMM YYYY')
+    this.setState({date: month});
+    this.props.planningsFetch(month);
+  }
 
   render(){
     const{container, mainContainer, datePickerStyle, pickerText} = styles;
@@ -57,6 +65,18 @@ class Plannings extends Component {
         />
 
         <View style={mainContainer}>
+          <CardSection style={{alignItems: 'center'}}>
+            <View style={datePickerStyle}>
+              <DatePicker
+                style={{ flex: 1}}
+                date = {this.state.date}
+                placeholder="tap to select date"
+                format="MMMM YYYY"
+                showIcon={false}
+                onDateChange={month => this.search(month)}
+              />
+            </View>
+          </CardSection>
 
           <ListView
             enableEmptySections
@@ -74,11 +94,26 @@ const styles = {
     flex: 1
   },
 
+  datePickerStyle: {
+     flex: 2,
+     flexDirection: 'row',
+     padding: 5,
+    //  backgroundColor: 'blue'
+  },
+
   mainContainer: {
     flex: 12,
     // alignItems: 'center',
     backgroundColor: 'beige'
-  }
+  },
+
+  pickerText: {
+  // backgroundColor: 'yellow',
+  color: 'darkslategrey',
+  fontSize: 18,
+  paddingLeft: 10,
+  flex: 1
+}
 };
 
 const mapStateToProps = state => {

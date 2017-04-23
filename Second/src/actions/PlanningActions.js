@@ -23,20 +23,23 @@ export const planningsCreate = ({ date, category, amount, notes, month }) => {
     firebase.database().ref(`/users/${currentUser.uid}/plannings`)
       .push({ date, category, amount, notes, month })
       .then(() => {
-        console.log(month)
         dispatch({ type: PLANNINGS_CREATE});
         Actions.pop();
+        // JSON.stringify(month);
       });
   };
 };
 
-export const planningsFetch = () => {
+export const planningsFetch = (month) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
     firebase.database().ref(`/users/${currentUser.uid}/plannings`)
-      .on('value', snapshot => {
-        dispatch({ type: PLANNINGS_FETCH_SUCCESS, payload: snapshot.val() });
+      .orderByChild('month')
+      .equalTo(month)
+      .on('value', function(snap) {
+        dispatch({ type: PLANNINGS_FETCH_SUCCESS, payload: snap.val() });
+        // console.log(month, snap.val())
       });
   };
 };
