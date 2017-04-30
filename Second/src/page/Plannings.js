@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import {
   View,
+  Text,
   TextInput,
   ListView
 } from 'react-native';
@@ -13,6 +14,7 @@ const moment = require('moment')
 import CardSection from './../components/CardSection';
 import PlanningsListItem from './PlanningsListItem';
 import Header from './../components/Header';
+import  Card  from './../components/Card';
 
 class Plannings extends Component {
 
@@ -53,8 +55,24 @@ class Plannings extends Component {
     this.props.planningsFetch(month);
   }
 
+  calculateSum = () => {
+    console.log(this.props.plannings)
+    if (this.props.planning !== null) {
+      let planningArray = this.props.plannings;
+      let total = 0;
+      planningArray.forEach((key, i) => {
+        total += parseFloat(key.amount)
+      })
+      console.log(total)
+      return <Text>Total RM {total}</Text>
+    }
+    else {
+      return <Text>Total RM 0</Text>
+    }
+  }
+
   render(){
-    const{container, mainContainer, datePickerStyle, pickerText} = styles;
+    const{container, titleStyle, mainContainer, datePickerStyle, pickerText} = styles;
 
     return(
       <View style={container}>
@@ -68,21 +86,32 @@ class Plannings extends Component {
           <CardSection style={{alignItems: 'center'}}>
             <View style={datePickerStyle}>
               <DatePicker
-                style={{ flex: 1}}
+                style = {{ flex: 1}}
                 date = {this.state.date}
-                placeholder="tap to select date"
-                format="MMMM YYYY"
-                showIcon={false}
-                onDateChange={month => this.search(month)}
+                mode = 'date'
+                androidMode = 'spinner'
+                placeholder = "tap to select date"
+                format = "MMMM YYYY"
+                showIcon = {false}
+                onDateChange = {month => this.search(month)}
               />
             </View>
           </CardSection>
 
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource}
-            renderRow={this.renderRow}
-          />
+          <Card>
+          <View style={{alignItems: 'center'}}>
+            <Text style={titleStyle}>
+              {this.calculateSum()}
+            </Text>
+          </View>
+
+
+            <ListView
+              enableEmptySections
+              dataSource={this.dataSource}
+              renderRow={this.renderRow}
+            />
+          </Card>
         </View>
       </View>
     );
@@ -94,6 +123,12 @@ const styles = {
     flex: 1
   },
 
+  titleStyle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    padding: 10
+  },
+
   datePickerStyle: {
      flex: 2,
      flexDirection: 'row',
@@ -102,25 +137,25 @@ const styles = {
   },
 
   mainContainer: {
-    flex: 12,
+    flex: 13,
     // alignItems: 'center',
     backgroundColor: 'beige'
   },
-
-  pickerText: {
-  // backgroundColor: 'yellow',
-  color: 'darkslategrey',
-  fontSize: 18,
-  paddingLeft: 10,
-  flex: 1
-}
+//
+//   pickerText: {
+//   // backgroundColor: 'yellow',
+//   color: 'darkslategrey',
+//   fontSize: 18,
+//   paddingLeft: 10,
+//   flex: 1
+// }
 };
 
 const mapStateToProps = state => {
+
   const plannings = _.map(state.plannings, (val, uid) => {
     return { ...val, uid };
   });
-
   return {plannings};
 }
 

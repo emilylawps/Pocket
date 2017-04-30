@@ -17,11 +17,6 @@ class PlanningsListItem extends Component {
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
 
-          <Card>
-            <Text style={titleStyle}>
-              {month}
-            </Text>
-
             <CardSection style={{flexDirection: 'column'}}>
               <View style={containerStyle}>
                 <Text style={categoryStyle}>
@@ -35,7 +30,6 @@ class PlanningsListItem extends Component {
               </View>
             </CardSection>
 
-          </Card>
         </View>
       </TouchableWithoutFeedback>
     );

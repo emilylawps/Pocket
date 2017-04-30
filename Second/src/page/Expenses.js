@@ -96,6 +96,10 @@ const styles = {
 };
 
 const mapStateToProps = state => {
+  // const payload = _.orderBy (state.expenses, function(node){
+  //   return -(new Date(node.date).getTime());
+  // });
+  // console.log(payload)
   const expenses = _.map(state.expenses, (val, uid) => {
     return { ...val, uid };
   });

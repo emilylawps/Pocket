@@ -34,6 +34,8 @@ class ExpensesForm extends Component {
                 placeholder="tap to select date"
                 format="DD/MM/YYYY"
                 showIcon={false}
+                mode = 'date'
+                androidMode = 'spinner'
                 onDateChange={value => this.props.expensesUpdate({prop: 'date', value})}
               />
             </View>
