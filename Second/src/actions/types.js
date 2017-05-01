@@ -9,3 +9,6 @@ export const PLANNINGS_CREATE = 'plannings_create';
 export const PLANNINGS_FETCH_SUCCESS = 'plannings_fetch_success';
 export const PLANNINGS_SAVE_SUCCESS = 'plannings_save_success';
 export const PLANNINGS_CLEAR = 'plannings_clear';
+
+export const EXPENSES_STATISTICS_FETCH_SUCCESS = 'expenses_statistics_fetch_success';
+export const PLANNINGS_STATISTICS_FETCH_SUCCESS = 'plannings_statistics_fetch_success';

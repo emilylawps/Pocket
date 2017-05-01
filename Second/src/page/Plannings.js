@@ -14,13 +14,11 @@ const moment = require('moment')
 import CardSection from './../components/CardSection';
 import PlanningsListItem from './PlanningsListItem';
 import Header from './../components/Header';
-import  Card  from './../components/Card';
+import Card  from './../components/Card';
 
 class Plannings extends Component {
 
-  state = {
-    date: new Date(),
-  };
+  state = {date: new Date()};
 
   componentWillMount() {
     month = moment(this.state.date).format('MMMM YYYY')
@@ -72,7 +70,7 @@ class Plannings extends Component {
   }
 
   render(){
-    const{container, titleStyle, mainContainer, datePickerStyle, pickerText} = styles;
+    const{container, titleStyle, mainContainer, datePickerStyle} = styles;
 
     return(
       <View style={container}>
@@ -90,7 +88,7 @@ class Plannings extends Component {
                 date = {this.state.date}
                 mode = 'date'
                 androidMode = 'spinner'
-                placeholder = "tap to select date"
+                placeholder = "tap to select month"
                 format = "MMMM YYYY"
                 showIcon = {false}
                 onDateChange = {month => this.search(month)}
@@ -140,15 +138,7 @@ const styles = {
     flex: 13,
     // alignItems: 'center',
     backgroundColor: 'beige'
-  },
-//
-//   pickerText: {
-//   // backgroundColor: 'yellow',
-//   color: 'darkslategrey',
-//   fontSize: 18,
-//   paddingLeft: 10,
-//   flex: 1
-// }
+  }
 };
 
 const mapStateToProps = state => {

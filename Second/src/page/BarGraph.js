@@ -4,17 +4,13 @@ import { Actions } from 'react-native-router-flux';
 import  CardSection  from './../components/CardSection';
 import  Card  from './../components/Card';
 
-class ExpensesListItem extends Component {
-  onRowPress() {
-    Actions.expensesEdit({ expense: this.props.expense });
-  }
+class BarGraph extends Component {
 
   render() {
-    const { date, category, amount } = this.props.expense;
+    const { category, amount } = this.props.statistic;
     const {titleStyle, containerStyle, categoryStyle, amountStyle} = styles;
 
     return (
-      <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
 
             <CardSection style={{flexDirection: 'column'}}>
@@ -31,7 +27,6 @@ class ExpensesListItem extends Component {
             </CardSection>
 
         </View>
-      </TouchableWithoutFeedback>
     );
   }
 }
@@ -60,4 +55,4 @@ const styles = {
   }
 };
 
-export default ExpensesListItem;
+export default BarGraph;

@@ -25,7 +25,6 @@ export const planningsCreate = ({ date, category, amount, notes, month }) => {
       .then(() => {
         dispatch({ type: PLANNINGS_CREATE});
         Actions.pop();
-        // JSON.stringify(month);
       });
   };
 };

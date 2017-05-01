@@ -15,6 +15,7 @@ import Input from './../components/Input';
 
 class PlanningsForm extends Component {
 
+
   render() {
     const { buttonStyle, buttonText, labelStyle, inputStyle, pickerText, datePickerStyle} = styles;
     return (
@@ -24,7 +25,7 @@ class PlanningsForm extends Component {
               <DatePicker
                 style={{ flex: 1}}
                 date = {this.props.date}
-                placeholder="tap to select date"
+                placeholder="tap to select month"
                 format="DD/MM/YYYY"
                 showIcon={false}
                 onDateChange={value => this.props.planningsUpdate({prop: 'date', value})}

@@ -2,22 +2,26 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import {
   View,
+  Text,
   TextInput,
   ListView
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import { connect } from 'react-redux';
 import { expensesFetch } from './../actions';
-// import DatePicker from 'react-native-datepicker';
-// import moment from 'moment';
+import DatePicker from 'react-native-datepicker';
+import moment from 'moment';
 import CardSection from './../components/CardSection';
 import ExpensesListItem from './ExpensesListItem';
 import Header from './../components/Header';
 
 class Expenses extends Component {
 
+    state = {date: new Date()};
+
   componentWillMount() {
-    this.props.expensesFetch();
+    date = moment(this.state.date).format('DD/MM/YYYY')
+    this.props.expensesFetch(date);
     this.createDataSource(this.props);
   }
 
@@ -39,14 +43,14 @@ class Expenses extends Component {
       return <ExpensesListItem expense={expense} />;
     }
 
-  // search(date) {
-  //   this.setState({date: date});
-  //   // console.log(date);
-  //   this.props.expensesFetch(date);
-  // }
+  search(date) {
+    this.setState({date: date});
+    // console.log(date);
+    this.props.expensesFetch(date);
+  }
 
   render(){
-    const {container, mainContainer, datePickerStyle, pickerText} = styles;
+    const {container, mainContainer, datePickerStyle} = styles;
 
     return(
       <View style={container}>
@@ -57,6 +61,21 @@ class Expenses extends Component {
         />
 
         <View style={mainContainer}>
+          <CardSection style={{alignItems: 'center'}}>
+            <View style={datePickerStyle}>
+              <DatePicker
+                style = {{ flex: 1}}
+                date = {this.state.date}
+                mode = 'date'
+                androidMode = 'spinner'
+                placeholder = "tap to select date"
+                format = "DD/MM/YYYY"
+                showIcon = {false}
+                onDateChange = {date => this.search(date)}
+              />
+            </View>
+          </CardSection>
+
           <ListView
             enableEmptySections
             dataSource={this.dataSource}
@@ -84,14 +103,6 @@ const styles = {
      flexDirection: 'row',
      padding: 5,
     //  backgroundColor: 'blue'
-  },
-
-  pickerText: {
-    // backgroundColor: 'yellow',
-    color: 'darkslategrey',
-    fontSize: 18,
-    paddingLeft: 10,
-    flex: 1
   }
 };
 

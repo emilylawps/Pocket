@@ -23,21 +23,19 @@ export const expensesCreate = ({ date, category, amount, notes, month }) => {
     firebase.database().ref(`/users/${currentUser.uid}/expenses`)
       .push({ date, category, amount, notes, month })
       .then(() => {
-        console.log(date)
         dispatch({ type: EXPENSES_CREATE});
         Actions.pop();
-        // JSON.stringify(date);
       });
   };
 };
 
-export const expensesFetch = () => {
+export const expensesFetch = (date) => {
   const { currentUser } = firebase.auth();
 
   return (dispatch) => {
       firebase.database().ref(`/users/${currentUser.uid}/expenses`)
-        // .orderByChild('date')
-        // .equalTo(date)
+        .orderByChild('date')
+        .equalTo(date)
         .on('value', function(snap) {
           dispatch({ type: EXPENSES_FETCH_SUCCESS, payload: snap.val() });
             // console.log(date, snap.val())
