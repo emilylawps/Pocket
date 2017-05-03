@@ -39,9 +39,8 @@ class Statistic extends Component {
     this.showCurrentMonth(month);
     this.props.expensesStatisticsFetch(month);
     this.props.planningsStatisticsFetch(month);
-    // console.log(this.props.statistic)
-
     this.createDataSource(this.props);
+    // console.log(this.props.statistics)
   }
 
   componentWillReceiveProps(nextProps) {
@@ -135,12 +134,19 @@ class Statistic extends Component {
             </Picker>
           </CardSection>
 
-          <ListView
-            enableEmptySections
-            dataSource={this.dataSource}
-            renderRow={this.renderRow}
-          />
+          <CardSection>
+            <View>
+              <Text>
 
+              </Text>
+            </View>
+          </CardSection>
+
+            <ListView
+              enableEmptySections
+              dataSource={this.dataSource}
+              renderRow={this.renderRow}
+            />
         </View>
       </View>
     );
@@ -175,11 +181,30 @@ const styles = {
 
 const mapStateToProps = state => {
 
-  const statistics = _.map(state.statistics, (val, uid) => {
+    const filtered = _.map(state.expensesStatistics, function(a)  {
+      amount= a.amount;
+      category= a.category;
+      return {amount, category};
+    });
+    // console.log(filtered);
+
+    const sum = (total, item) => total += parseFloat(item.amount);
+    const result = _.chain(filtered)
+    .groupBy('category')
+    .map((group, category) => ({ category: category, amount : _.reduce(group, sum, 0) }))
+    .value();
+    console.log(result);
+
+    const sorted = _.orderBy (result, function(o){
+      return -(o.amount);
+    })
+    console.log(sorted);
+
+    const statistics = _.map(sorted, (val, uid) => {
     return { ...val, uid };
   });
-
   return {statistics};
+  // console.log(statistics)
 }
 
 export default connect(mapStateToProps, { expensesStatisticsFetch, planningsStatisticsFetch })(Statistic);

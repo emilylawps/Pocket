@@ -5,12 +5,14 @@ import ExpensesReducer from './ExpensesReducer';
 import PlanningsFormReducer from './PlanningsFormReducer';
 import PlanningsReducer from './PlanningsReducer';
 
-import StatisticsReducer from './StatisticsReducer';
+import PlanningsStatisticsReducer from './PlanningsStatisticsReducer';
+import ExpensesStatisticsReducer from './ExpensesStatisticsReducer';
 
 export default combineReducers({
   addExpenses: ExpensesFormReducer,
   expenses: ExpensesReducer,
   addPlannings: PlanningsFormReducer,
   plannings: PlanningsReducer,
-  statistics: StatisticsReducer
+  expensesStatistics: ExpensesStatisticsReducer,
+  planningsStatistics: PlanningsStatisticsReducer
 });

@@ -14,7 +14,7 @@ export const expensesStatisticsFetch = (month) => {
       .equalTo(month)
       .on('value', function(snap) {
         dispatch({ type: EXPENSES_STATISTICS_FETCH_SUCCESS, payload: snap.val() });
-        console.log(month, snap.val())
+        // console.log(month, snap.val())
       });
   };
 };
@@ -28,7 +28,7 @@ export const planningsStatisticsFetch = (month) => {
       .equalTo(month)
       .on('value', function(snap) {
         dispatch({ type: PLANNINGS_STATISTICS_FETCH_SUCCESS, payload: snap.val() });
-        console.log(month, snap.val())
+        // console.log(month, snap.val())
       });
   };
 };

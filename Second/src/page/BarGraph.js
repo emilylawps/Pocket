@@ -9,7 +9,7 @@ class BarGraph extends Component {
   render() {
     const { category, amount } = this.props.statistic;
     const {titleStyle, containerStyle, categoryStyle, amountStyle} = styles;
-
+    // console.log(this.props.statistics)
     return (
         <View>
 
