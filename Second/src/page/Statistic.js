@@ -11,9 +11,10 @@ import { connect } from 'react-redux';
 import { expensesStatisticsFetch, planningsStatisticsFetch } from './../actions';
 import Header from './../components/Header';
 import CardSection from './../components/CardSection';
+import Card from './../components/Card';
 import DatePicker from 'react-native-datepicker';
 const moment = require('moment');
-import BarGraph from './BarGraph';
+import StatisticsList from './StatisticsList';
 
 
 class Statistic extends Component {
@@ -58,7 +59,7 @@ class Statistic extends Component {
   }
 
   renderRow(statistic) {
-      return <BarGraph statistic={statistic} />;
+      return <StatisticsList statistic={statistic} />;
     }
 
 
@@ -103,17 +104,31 @@ class Statistic extends Component {
     });
   }
 
+  calculateSum = () => {
+    // console.log(this.props.statistics)
+    if (this.props.statistic !== null) {
+      let statisticArray = this.props.statistics;
+      let total = 0;
+      statisticArray.forEach((key, i) => {
+        total += parseFloat(key.amount)
+      })
+      // console.log(total)
+      return <Text>Total RM {total}</Text>
+    }
+    else {
+      return <Text>Total RM 0</Text>
+    }
+  }
 
   render(){
-    const{container, mainContainer, datePickerStyle, pickerText} = styles;
+    const{container, titleStyle, mainContainer, datePickerStyle, pickerText} = styles;
 
     return(
       <View style={container}>
         <Header Name={'Statistic'} />
 
         <View style={mainContainer}>
-
-          <CardSection style={{justifyContent: 'center'}}>
+          <CardSection style={{alignItems: 'center'}}>
             <Picker
               style={{flex:2}}
               selectedValue={this.state.currentMonth}
@@ -134,19 +149,20 @@ class Statistic extends Component {
             </Picker>
           </CardSection>
 
-          <CardSection>
-            <View>
-              <Text>
-
-              </Text>
-            </View>
-          </CardSection>
-
+          <Card>
             <ListView
               enableEmptySections
               dataSource={this.dataSource}
               renderRow={this.renderRow}
             />
+
+            <View style={{alignItems: 'flex-end'}}>
+              <Text style={titleStyle}>
+                {this.calculateSum()}
+              </Text>
+            </View>
+          </Card>
+
         </View>
       </View>
     );
@@ -158,16 +174,16 @@ const styles = {
     flex: 1
   },
 
-  mainContainer: {
-    flex: 12,
-    alignItems: 'center'
+  titleStyle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    padding: 10
   },
 
-  datePickerStyle: {
-     flex: 2,
-     flexDirection: 'row',
-     padding: 5,
-    //  backgroundColor: 'blue'
+  mainContainer: {
+    flex: 12,
+    // alignItems: 'center'
+    backgroundColor: 'beige'
   },
 
   pickerText: {
@@ -193,7 +209,7 @@ const mapStateToProps = state => {
     .groupBy('category')
     .map((group, category) => ({ category: category, amount : _.reduce(group, sum, 0) }))
     .value();
-    console.log(result);
+    // console.log(result);
 
     const sorted = _.orderBy (result, function(o){
       return -(o.amount);
@@ -204,7 +220,6 @@ const mapStateToProps = state => {
     return { ...val, uid };
   });
   return {statistics};
-  // console.log(statistics)
 }
 
 export default connect(mapStateToProps, { expensesStatisticsFetch, planningsStatisticsFetch })(Statistic);

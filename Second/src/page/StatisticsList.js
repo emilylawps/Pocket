@@ -1,18 +1,23 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, View } from 'react-native';
 import { Actions } from 'react-native-router-flux';
 import  CardSection  from './../components/CardSection';
 import  Card  from './../components/Card';
+import Statistic from './Statistic';
 
-class BarGraph extends Component {
+class StatisticsList extends Component {
 
   render() {
+    console.log(this.props.sooort)
     const { category, amount } = this.props.statistic;
+    // console.log(this.props.statistic.amount);
+    concat = _.concat(this.props.statistic.amount);
+    console.log(concat);
     const {titleStyle, containerStyle, categoryStyle, amountStyle} = styles;
-    // console.log(this.props.statistics)
+
     return (
         <View>
-
             <CardSection style={{flexDirection: 'column'}}>
               <View style={containerStyle}>
                 <Text style={categoryStyle}>
@@ -25,7 +30,6 @@ class BarGraph extends Component {
 
               </View>
             </CardSection>
-
         </View>
     );
   }
@@ -55,4 +59,4 @@ const styles = {
   }
 };
 
-export default BarGraph;
+export default StatisticsList;

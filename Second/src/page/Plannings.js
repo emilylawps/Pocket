@@ -54,7 +54,7 @@ class Plannings extends Component {
   }
 
   calculateSum = () => {
-    console.log(this.props.plannings)
+    // console.log(this.props.plannings)
     if (this.props.planning !== null) {
       let planningArray = this.props.plannings;
       let total = 0;
