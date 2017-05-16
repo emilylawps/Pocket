@@ -14,14 +14,12 @@ class Menu extends Component {
 
   render() {
 
-    const {container, menuContainer, welcomeText, menuButton, menuText, logoutText, logoutButton} = styles;
+    const {container, menuContainer, menuButton, menuText, logoutText, logoutButton} = styles;
 
     return (
       <View style={container}>
        <Header Name={'Home'} />
         <View style={menuContainer}>
-
-        <Text style={welcomeText}>Welcome! Username</Text>
 
         <TouchableNativeFeedback onPress={Actions.expenses}>
           <View style={menuButton}>
@@ -64,11 +62,11 @@ const styles = StyleSheet.create ({
     flex: 12
   },
 
-  welcomeText:{
-    fontSize: 18,
-    paddingTop: 10,
-    color: 'lightslategrey'
-  },
+  // welcomeText:{
+  //   fontSize: 18,
+  //   paddingTop: 10,
+  //   color: 'lightslategrey'
+  // },
 
   menuButton:{
     alignItems:'center',

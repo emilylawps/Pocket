@@ -17,7 +17,13 @@ class ExpensesListItem extends Component {
       <TouchableWithoutFeedback onPress={this.onRowPress.bind(this)}>
         <View>
 
-            <CardSection style={{flexDirection: 'column'}}>
+            <CardSection
+              style={{
+                flexDirection: 'column',
+                paddingHorizontal: 5,
+                paddingVertical: 8
+              }}
+            >
               <View style={containerStyle}>
                 <Text style={categoryStyle}>
                   {category}
@@ -48,15 +54,15 @@ const styles = {
   },
 
   categoryStyle: {
-    fontSize: 23,
+    fontSize: 25,
     paddingLeft: 15,
-    fontWeight: 'bold'
+    // fontWeight: 'bold'
   },
 
   amountStyle: {
-    fontSize: 23,
+    fontSize: 25,
     paddingRight: 15,
-    fontWeight: 'bold'
+    // fontWeight: 'bold'
   }
 };
 

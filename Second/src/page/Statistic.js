@@ -113,10 +113,10 @@ class Statistic extends Component {
         total += parseFloat(key.amount)
       })
       // console.log(total)
-      return <Text>Total RM {total}</Text>
+      return <Text>Total   RM {total}</Text>
     }
     else {
-      return <Text>Total RM 0</Text>
+      return <Text>Total   RM 0</Text>
     }
   }
 
@@ -150,17 +150,17 @@ class Statistic extends Component {
           </CardSection>
 
           <Card>
-            <ListView
-              enableEmptySections
-              dataSource={this.dataSource}
-              renderRow={this.renderRow}
-            />
-
             <View style={{alignItems: 'flex-end'}}>
               <Text style={titleStyle}>
                 {this.calculateSum()}
               </Text>
             </View>
+
+            <ListView
+              enableEmptySections
+              dataSource={this.dataSource}
+              renderRow={this.renderRow}
+            />
           </Card>
 
         </View>
@@ -209,12 +209,21 @@ const mapStateToProps = state => {
     .groupBy('category')
     .map((group, category) => ({ category: category, amount : _.reduce(group, sum, 0) }))
     .value();
-    // console.log(result);
+    console.log(result);
 
-    const sorted = _.orderBy (result, function(o){
+    const sumTotal = _.sumBy(result, "amount");
+    // console.log(sumTotal);
+
+    const percentageArr = _.each(result, function(key){
+      key.percentage = _.round((key.amount / sumTotal) * 100, 2);
+      key.total = sumTotal;
+    });
+    console.log(percentageArr);
+
+    const sorted = _.orderBy (percentageArr, function(o){
       return -(o.amount);
     })
-    console.log(sorted);
+    // console.log(sorted);
 
     const statistics = _.map(sorted, (val, uid) => {
     return { ...val, uid };

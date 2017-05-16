@@ -9,12 +9,12 @@ import Statistic from './Statistic';
 class StatisticsList extends Component {
 
   render() {
-    console.log(this.props.sooort)
-    const { category, amount } = this.props.statistic;
-    // console.log(this.props.statistic.amount);
-    concat = _.concat(this.props.statistic.amount);
-    console.log(concat);
-    const {titleStyle, containerStyle, categoryStyle, amountStyle} = styles;
+
+    const { category, amount, percentage, total } = this.props.statistic;
+    console.log(this.props.statistic);
+    // concat = _.concat(this.props.statistic.amount);
+    // console.log(concat);
+    const {titleStyle, containerStyle, categoryStyle, amountStyle, listStyle} = styles;
 
     return (
         <View>
@@ -24,9 +24,15 @@ class StatisticsList extends Component {
                   {category}
                 </Text>
 
-                <Text style={amountStyle}>
-                RM {amount}
-                </Text>
+                <View style={listStyle}>
+                  <Text style={amountStyle}>
+                    {percentage} %
+                  </Text>
+
+                  <Text style={amountStyle}>
+                    RM {amount}
+                  </Text>
+                </View>
 
               </View>
             </CardSection>
@@ -46,16 +52,21 @@ const styles = {
     justifyContent: 'space-between'
   },
 
+  listStyle: {
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  },
+
   categoryStyle: {
-    fontSize: 23,
+    fontSize: 22,
     paddingLeft: 15,
-    fontWeight: 'bold'
+    // fontWeight: 'bold'
   },
 
   amountStyle: {
-    fontSize: 23,
+    fontSize: 20,
     paddingRight: 15,
-    fontWeight: 'bold'
+    // fontWeight: 'bold'
   }
 };
 
