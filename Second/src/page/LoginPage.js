@@ -15,8 +15,8 @@ const dismissKeyboard = require('dismissKeyboard')
 
 class LoginPage extends Component {
   state = {
-    email: '',
-    password: '',
+    email: 'yoyo@gmail.com',
+    password: 'password',
     error: '',
     loading: false
   };
@@ -97,7 +97,7 @@ class LoginPage extends Component {
           <View style={bottomContainer}>
             <TouchableNativeFeedback onPress={Actions.forgotPassword}>
               <View>
-                <Text style={bottomText}>Forgot password?</Text>
+                <Text style={bottomText}>Please Do Not Forgot Password</Text>
               </View>
             </TouchableNativeFeedback>
           </View>

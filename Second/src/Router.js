@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {
   View
 } from 'react-native';
+import { Scene, Router, Actions } from 'react-native-router-flux';
 
-import { Scene, Router } from 'react-native-router-flux';
-
+import SplashScreen from './page/SplashScreen';
 import Authentication from './page/Authentication';
-// import LoginPage from './page/LoginPage';
+import LoginPage from './page/LoginPage';
 import Register from './page/Register';
 import forgotPassword from './page/forgotPassword';
 import Menu from './page/Menu';
@@ -19,13 +19,17 @@ import PlanningsEdit from './page/PlanningsEdit';
 import Statistic from './page/Statistic';
 
 class RouterComponent extends Component {
+
   render() {
     return(
         <Router>
-          <Scene key="root">
-            <Scene key="authentication"  hideNavBar component={Authentication}  initial />
+          <Scene key="root" initial>
+            <Scene key="splash" component={SplashScreen} initial />
+            <Scene key="login" hideNavBar component={LoginPage} />
             <Scene key="register" hideNavBar component={Register} />
             <Scene key="forgotPassword" hideNavBar component={forgotPassword} />
+          </Scene>
+          <Scene key="main">
             <Scene key="menu" hideNavBar component={Menu} />
             <Scene key="expenses" hideNavBar component={Expenses} />
             <Scene key="expensesEdit" hideNavBar component={ExpensesEdit} />

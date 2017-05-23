@@ -10,25 +10,6 @@ class Authentication extends Component {
 
   state = { loggedIn: false };
 
-  componentWillMount() {
-    firebase.initializeApp({
-      apiKey: "AIzaSyCzgCw6LALYFF_XWFxWHII_WZmC7XJBDXk",
-      authDomain: "authentication-8942a.firebaseapp.com",
-      databaseURL: "https://authentication-8942a.firebaseio.com",
-      storageBucket: "authentication-8942a.appspot.com",
-      messagingSenderId: "772421632096"
-    });
-
-    firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
-        this.setState({ loggedIn: true });
-      }
-      else {
-        this.setState({ loggedIn: false});
-      }
-    });
-  }
-
   renderContent(){
     switch (this.state.loggedIn) {
       case true:
@@ -37,7 +18,6 @@ class Authentication extends Component {
         return <LoginPage />;
     }
   }
-
 
   render() {
     return (
