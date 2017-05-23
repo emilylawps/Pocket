@@ -8,7 +8,7 @@ import Menu from './Menu';
 
 class Authentication extends Component {
 
-  state = {loggedIn: false};
+  state = { loggedIn: false };
 
   componentWillMount() {
     firebase.initializeApp({
@@ -21,7 +21,7 @@ class Authentication extends Component {
 
     firebase.auth().onAuthStateChanged((user) => {
       if(user) {
-        this.setState({ loggedIn: true});
+        this.setState({ loggedIn: true });
       }
       else {
         this.setState({ loggedIn: false});

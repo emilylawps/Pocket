@@ -23,7 +23,7 @@ class RouterComponent extends Component {
     return(
         <Router>
           <Scene key="root">
-            <Scene key="authentication"  hideNavBar component={Authentication}  initial={true} />
+            <Scene key="authentication"  hideNavBar component={Authentication}  initial />
             <Scene key="register" hideNavBar component={Register} />
             <Scene key="forgotPassword" hideNavBar component={forgotPassword} />
             <Scene key="menu" hideNavBar component={Menu} />
@@ -34,7 +34,6 @@ class RouterComponent extends Component {
             <Scene key="planningsEdit" hideNavBar component={PlanningsEdit} />
             <Scene key="addPlannings" hideNavBar component={AddPlannings} />
             <Scene key="statistic" hideNavBar component={Statistic} />
-
           </Scene>
         </Router>
     );

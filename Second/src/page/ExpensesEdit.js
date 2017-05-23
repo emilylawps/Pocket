@@ -67,7 +67,7 @@ class ExpensesEdit extends Component {
     return (
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
         <View style={container}>
-          <Header Name={'Edit Expenses'} />
+          <Header Name={'Edit Expense'} />
 
           <View style={mainContainer}>
             <ExpensesForm />

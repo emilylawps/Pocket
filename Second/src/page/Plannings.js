@@ -75,7 +75,7 @@ class Plannings extends Component {
     return(
       <View style={container}>
         <Header
-          Name={'Planning'}
+          Name={'Plannings'}
           Icon={(require('./../add.png'))}
           Page={(Actions.addPlannings)}
         />

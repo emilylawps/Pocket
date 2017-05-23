@@ -14,23 +14,25 @@ class StatisticsList extends Component {
     console.log(this.props.statistic);
     // concat = _.concat(this.props.statistic.amount);
     // console.log(concat);
-    const {titleStyle, containerStyle, categoryStyle, amountStyle, listStyle} = styles;
+    const {titleStyle, containerStyle, categoryStyle, amountStyle, listStyle, percentageStyle} = styles;
 
     return (
         <View>
             <CardSection style={{flexDirection: 'column'}}>
               <View style={containerStyle}>
-                <Text style={categoryStyle}>
-                  {category}
-                </Text>
-
                 <View style={listStyle}>
-                  <Text style={amountStyle}>
-                    {percentage} %
+                  <Text style={categoryStyle}>
+                    {category}
                   </Text>
 
                   <Text style={amountStyle}>
                     RM {amount}
+                  </Text>
+                </View>
+
+                <View style={{justifyContent: 'center'}}>
+                  <Text style={percentageStyle}>
+                    {percentage} %
                   </Text>
                 </View>
 
@@ -65,8 +67,14 @@ const styles = {
 
   amountStyle: {
     fontSize: 20,
+    paddingLeft: 15,
+    fontWeight: 'bold'
+  },
+
+  percentageStyle: {
+    fontSize: 25,
     paddingRight: 15,
-    // fontWeight: 'bold'
+    // backgroundColor: 'yellow'
   }
 };
 

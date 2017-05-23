@@ -5,11 +5,11 @@ import {
   TouchableNativeFeedback
 } from 'react-native';
 
-const Button = ({ onPress, children }) => {
+const Button = ({ onPress, disabled, children }) => {
   const { buttonStyle, buttonText } = styles;
 
   return (
-    <TouchableNativeFeedback onPress={onPress}>
+    <TouchableNativeFeedback onPress={onPress} disabled={disabled}>
       <View style={buttonStyle}>
         <Text style={buttonText}>
           {children}

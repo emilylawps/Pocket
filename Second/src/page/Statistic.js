@@ -121,19 +121,18 @@ class Statistic extends Component {
   }
 
   render(){
-    const{container, titleStyle, mainContainer, datePickerStyle, pickerText} = styles;
+    const{testShit, container, titleStyle, mainContainer, datePickerStyle, pickerText, contentContainerStyle} = styles;
 
     return(
-      <View style={container}>
+      <View style={[container]}>
         <Header Name={'Statistic'} />
 
-        <View style={mainContainer}>
+        <View style={[mainContainer]}>
           <CardSection style={{alignItems: 'center'}}>
             <Picker
               style={{flex:2}}
               selectedValue={this.state.currentMonth}
-              onValueChange={month => this.search(month)}
-            >
+              onValueChange={month => this.search(month)}>
               <Picker.Item label={this.state.firstMonth} value={this.state.firstMonth} />
               <Picker.Item label={this.state.monthA} value={this.state.monthA} />
               <Picker.Item label={this.state.monthB} value={this.state.monthB} />
@@ -150,13 +149,15 @@ class Statistic extends Component {
           </CardSection>
 
           <Card>
-            <View style={{alignItems: 'flex-end'}}>
+            <View style={{alignItems:'center'}}>
               <Text style={titleStyle}>
                 {this.calculateSum()}
               </Text>
             </View>
 
             <ListView
+              pagingEnabled={false}
+              contentContainerStyle={[contentContainerStyle]}
               enableEmptySections
               dataSource={this.dataSource}
               renderRow={this.renderRow}
@@ -170,6 +171,10 @@ class Statistic extends Component {
 }
 
 const styles = {
+  testShit: {
+    borderColor: 'red',
+    borderWidth: 2
+  },
   container: {
     flex: 1
   },
@@ -192,6 +197,9 @@ const styles = {
     fontSize: 18,
     paddingLeft: 10,
     flex: 1
+  },
+  contentContainerStyle: {
+    paddingBottom: 60
   }
 };
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   View,
   Text,
   StyleSheet,
@@ -12,48 +13,77 @@ import Header from './../components/Header';
 
 class Menu extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      loaded: false
+    }
+  }
+
+  componentWillMount() {
+    setTimeout(() => {
+      this.setState({ loaded: true })
+    }, 1000);
+  }
+
+  renderScreen() {
+    if (this.state.loaded) {
+      const {container, menuContainer, menuButton, menuText, logoutText, logoutButton} = styles;
+      return (
+        <View>
+          <TouchableNativeFeedback onPress={Actions.expenses}>
+            <View style={menuButton}>
+              <Text style={menuText}> Expenses </Text>
+            </View>
+          </TouchableNativeFeedback>
+
+          <TouchableNativeFeedback onPress={Actions.plannings}>
+            <View style={menuButton}>
+              <Text style={menuText}> Plannings </Text>
+            </View>
+          </TouchableNativeFeedback>
+
+          <TouchableNativeFeedback onPress={Actions.statistic}>
+            <View style={menuButton}>
+              <Text style={menuText}> Statistic </Text>
+            </View>
+          </TouchableNativeFeedback>
+
+          <TouchableNativeFeedback onPress={() => firebase.auth().signOut()}>
+            <View style={logoutButton} >
+              <Text style={logoutText}> Log Out </Text>
+            </View>
+          </TouchableNativeFeedback>
+        </View>
+      )
+    } else {
+      return (
+        <ActivityIndicator size="large" style={{ marginTop: 200 }} />
+      )
+    }
+  }
+
+
+
   render() {
-
-    const {container, menuContainer, menuButton, menuText, logoutText, logoutButton} = styles;
-
     return (
-      <View style={container}>
-       <Header Name={'Home'} />
-        <View style={menuContainer}>
-
-        <TouchableNativeFeedback onPress={Actions.expenses}>
-          <View style={menuButton}>
-            <Text style={menuText}> Expenses </Text>
-          </View>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback onPress={Actions.plannings}>
-          <View style={menuButton}>
-            <Text style={menuText}> Planning </Text>
-          </View>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback onPress={Actions.statistic}>
-          <View style={menuButton}>
-            <Text style={menuText}> Statistic </Text>
-          </View>
-        </TouchableNativeFeedback>
-
-        <TouchableNativeFeedback onPress={() => firebase.auth().signOut()}>
-          <View style={logoutButton} >
-            <Text style={logoutText}> Log Out </Text>
-          </View>
-        </TouchableNativeFeedback>
-
+      <View style={styles.container}>
+        <Header Name={'Home'} />
+        <View style={styles.menuContainer}>
+          {this.renderScreen()}
         </View>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create ({
   container:{
     flex:1
+  },
+  centerEverything: {
+    justifyContent: 'center',
+    alignItems: 'center'
   },
 
   menuContainer:{

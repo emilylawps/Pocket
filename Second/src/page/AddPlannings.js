@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  ActivityIndicator,
   Text,
   View,
   TouchableWithoutFeedback,
@@ -13,7 +14,13 @@ import PlanningsForm from './PlanningsForm';
 import Button from './../components/Button';
 
 class AddPlannings extends Component {
-  state = { error:'' };
+  constructor(props) {
+    super(props);
+    this.state = {
+      error: '',
+      submitted: null
+    }
+  }
 
   componentWillMount() {
     this.props.planningsClear();
@@ -29,7 +36,7 @@ class AddPlannings extends Component {
         this.setState({ error: 'Enter a valid amount' });
     }
     else {
-      this.setState({error: ''});
+      this.setState({ error: '', submitted: false });
       selectedFullDate = new moment(date, "DD/MM/YYYY")
       selectedDate = moment(selectedFullDate).format("DD/MM/YYYY")
       selectedMonth = moment(selectedFullDate).format('MMMM YYYY')
@@ -44,13 +51,21 @@ class AddPlannings extends Component {
     }
   }
 
+  renderButtonText() {
+    if (this.state.submitted === null) {
+      return 'Save'
+    } else if (this.state.submitted === false){
+      return 'Submitting...'
+    }
+  }
+
   render(){
     const {container, mainContainer, errorText} = styles;
 
     return(
       <TouchableWithoutFeedback onPress={()=>dismissKeyboard()}>
         <View style={container}>
-          <Header Name={'Planning Of The Month'} />
+          <Header Name={'Add New Planning'} />
 
           <View style={mainContainer}>
 
@@ -58,8 +73,8 @@ class AddPlannings extends Component {
           <Text style={errorText}>
             {this.state.error}
           </Text>
-          <Button onPress={this.onButtonPress.bind(this)}>
-            Save
+          <Button onPress={this.onButtonPress.bind(this)} disabled={this.state.submitted === null ? false : true}>
+            {this.renderButtonText()}
           </Button>
 
           </View>
