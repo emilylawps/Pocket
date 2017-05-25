@@ -24,7 +24,7 @@ class RouterComponent extends Component {
     return(
         <Router>
           <Scene key="root" initial>
-            <Scene key="splash" component={SplashScreen} initial />
+            <Scene key="splash" hidenavbar component={SplashScreen} initial />
             <Scene key="login" hideNavBar component={LoginPage} />
             <Scene key="register" hideNavBar component={Register} />
             <Scene key="forgotPassword" hideNavBar component={forgotPassword} />
