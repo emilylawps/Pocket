@@ -14,7 +14,6 @@ const dismissKeyboard = require('dismissKeyboard')
 
 class Register extends Component {
   state = {
-    username: '',
     email: '',
     password: '',
     error: '',
@@ -38,7 +37,6 @@ class Register extends Component {
 
   onRegisterSuccess() {
     this.setState({
-      username: '',
       email: '',
       password: '',
       loading: false,
@@ -55,12 +53,6 @@ class Register extends Component {
           <Text style={titleName}>POCKET</Text>
 
           <KeyboardAvoidingView behavior = 'padding'>
-            <TextInput
-              placeholder="Username"
-              label="Username"
-              value = { this.state.username }
-              onChangeText = {username => this.setState({ username })}
-            />
 
             <TextInput
               placeholder="Email"
@@ -71,7 +63,7 @@ class Register extends Component {
             />
 
             <TextInput
-              placeholder="Password"
+              placeholder="Create a new Password"
               label="Password"
               secureTextEntry
               value = { this.state.password }

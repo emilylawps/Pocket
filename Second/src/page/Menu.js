@@ -16,8 +16,14 @@ class Menu extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // loaded: false
+      // loading: false
     }
+  }
+
+  onLogoutPress() {
+
+    firebase.auth().signOut();
+    Actions.root({type: 'reset'});
   }
 
   // componentWillMount() {
@@ -48,7 +54,7 @@ class Menu extends Component {
           </View>
         </TouchableNativeFeedback>
 
-        <TouchableNativeFeedback onPress={() => firebase.auth().signOut()}>
+        <TouchableNativeFeedback onPress={this.onLogoutPress.bind(this)}>
           <View style={logoutButton} >
             <Text style={logoutText}> Log Out </Text>
           </View>
@@ -116,5 +122,13 @@ const styles = StyleSheet.create ({
     fontSize: 25
   }
 });
+
+
+const mapStateToProps = (state) => {
+  return {
+    auth: state.auth
+  };
+};
+
 
 export default Menu;
