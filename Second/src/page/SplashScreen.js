@@ -23,7 +23,7 @@ class SplashScreen extends Component {
         Actions.main({ type: 'reset' });
       } else {
         console.log('no user')
-        Actions.login();
+        Actions.login({ type: 'reset' });
       }
     })
   }
